@@ -1,0 +1,83 @@
+.navbar-cont {
+    background-color: rgb(130, 130, 130);
+    height: 7dvh;
+    display: grid;
+    grid-template-columns: 3.2fr 17fr 3fr;
+}
+
+.home-link-cont {
+    height: 7dvh;
+    display: grid;
+    grid-template-columns: 0.8fr 2fr;
+}
+
+.logo-pic {
+    height: 6dvh;
+    width: 6dvh;
+    margin: auto;
+    border-radius: 1.5dvh;
+}
+
+.app-name {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 4dvh;
+    text-align: left;
+}
+
+.placeholder-text {
+    text-align: center;
+}
+
+.auth-view-cont {
+    display: grid;
+    grid-template-columns: 2.8fr 1.8fr;
+}
+
+.welcome-text {
+    font-size: 2.3dvh;
+    text-align: center;
+}
+
+.logout-btn {
+    border: none;
+    font-size: 1.8dvh;
+    height: 4dvh;
+    width: 4.5dvw;
+    border-radius: 2dvh;
+    margin-top: 1.5dvh;
+    margin-bottom: 1.5dvh;
+    transition: opacity 0.15s;
+}
+
+.logout-btn:hover {
+    opacity: 0.8;
+}
+
+.logout-btn:active {
+    opacity: 0.5;
+}
+
+.unauth-view-cont {
+    display: grid;
+    grid-template-columns: 2.8fr 1.8fr;
+}
+
+.login-btn {
+    border: none;
+    font-size: 1.8dvh;
+    height: 4dvh;
+    width: 4.5dvw;
+    border-radius: 2dvh;
+    margin-top: 1.5dvh;
+    margin-bottom: 1.5dvh;
+    transition: opacity 0.15s;
+}
+
+.login-btn:hover {
+    opacity: 0.8;
+}
+
+.login-btn:active {
+    opacity: 0.5;
+}
