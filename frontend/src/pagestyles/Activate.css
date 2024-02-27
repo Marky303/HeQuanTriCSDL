@@ -1,0 +1,37 @@
+.activate-form-cont {
+    background-color: rgb(203, 203, 203);
+    width: 30dvw;
+    height: 30dvh;
+    border-radius: 2.8dvh;
+    margin: auto;
+    margin-top: 25dvh;
+}
+
+.activate-user-prompt {
+    margin: 0px;
+    padding: 2.7dvh;
+    font-size: 5.5dvh;
+    text-align: center;
+}
+
+.activate-user-btn {
+    font-size: 3dvh;
+    height: 11dvh;
+    width: 25dvw;
+    margin-left: 2.5dvw;
+    margin-right: 2.5dvw;
+    margin-top: 2.5dvh;
+    border-radius: 4dvh;
+    border: none;
+    cursor: pointer;
+    transition: opacity font-size 0.15s;
+}
+
+.activate-user-btn:hover {
+    opacity: 0.7;
+    font-size: 3.5dvh;
+}
+
+.activate-user-btn:active {
+    opacity: 0.4;
+}

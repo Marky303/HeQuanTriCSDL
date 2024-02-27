@@ -77,7 +77,9 @@ export const AuthProvider = () => {
 
     if (response.status == 201) {
       // TODO better signup redirection
-      alert("User created successfully, please check your email for account activation")
+      alert(
+        "User created successfully, please check your email for account activation"
+      );
       navigate("/login");
     }
     // Notify if signup unsuccessful
@@ -95,6 +97,33 @@ export const AuthProvider = () => {
     navigate("/login");
   };
 
+  // Activate user
+  let activateUser = async (uid, token) => {
+    let response = await fetch("http://localhost:8000/auth/users/activation/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Set fields to send
+      body: JSON.stringify({
+        uid: uid,
+        token: token,
+      }),
+    });
+    let data = await response.json();
+
+    if (response.status == 204) {
+      alert("User activation successful")
+      navigate("/login");
+    }
+    // Notify if activation unsuccessful
+    else {
+      // TODO better notification
+      let detail = JSON.stringify(data);
+      alert(detail);
+    }
+  };
+
   // Getting refreshed token (...yes, pass it to whatever page)
   let updateToken = async () => {};
 
@@ -107,6 +136,7 @@ export const AuthProvider = () => {
     loginUser: loginUser,
     logoutUser: logoutUser,
     signupUser: signupUser,
+    activateUser: activateUser,
   };
 
   // Passing your context data here (including arguments/functions)
