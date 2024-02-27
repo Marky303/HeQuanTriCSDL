@@ -49,7 +49,8 @@ export const AuthProvider = () => {
     }
     // Notify if login unsuccessful
     else {
-      let detail = JSON.stringify(data.detail);
+      // TODO better notification
+      let detail = JSON.stringify(data);
       alert(detail);
     }
   };

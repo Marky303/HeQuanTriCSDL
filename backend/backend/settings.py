@@ -116,7 +116,17 @@ DJOSER = {
         'user_create'   : 'account.api.serializers.UserCreateSerializer',
         'user'          : 'account.api.serializers.UserCreateSerializer',
         'user_delete'   : 'djoser.serializers.UserDeleteSerializer',
-    }
+    },
+    
+    # Customized email
+    'EMAIL': {
+        'activation':       'account.email.ActivationEmail',
+        'confirmation':     'djoser.email.ConfirmationEmail',
+        'password_reset':   'djoser.email.PasswordResetEmail',
+        'password_changed_confirmation': 'djoser.email.PasswordChangedConfirmationEmail',
+        'username_changed_confirmation': 'djoser.email.UsernameChangedConfirmationEmail',
+        'username_reset': 'djoser.email.UsernameResetEmail',
+    },
 }
 
 # Djoser needed configs
