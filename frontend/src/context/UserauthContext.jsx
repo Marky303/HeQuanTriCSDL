@@ -139,6 +139,30 @@ export const AuthProvider = () => {
     }
   };
 
+  // Request a reset password confirmation email
+  let sendResetRequest = async (e) => {
+    e.preventDefault();
+
+    // Posting to server and get response
+    let response = await fetch("http://localhost:8000/auth/users/reset_password/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Set email to send
+      body: JSON.stringify({
+        email: e.target.email.value,
+      }),
+    });
+    if (response.status == 204) {
+      alert("Password reset email has been sent!")
+    }
+    else 
+    {
+      alert("Cannot find email")
+    }
+  };
+
   // Declaring context data to pass to other components
   let contextData = {
     // userauth related variables
@@ -150,6 +174,7 @@ export const AuthProvider = () => {
     signupUser: signupUser,
     activateUser: activateUser,
     updateToken: updateToken,
+    sendResetRequest: sendResetRequest,
   };
 
   useEffect(() => {
@@ -158,9 +183,6 @@ export const AuthProvider = () => {
 
     // Check if this route need token updating
     if (dashRegex.test(location.pathname)) {
-      //Test 
-      console.log("This page needs token refreshing")
-
       if (loading) {
         // Check if the user is loading into page(refresh the token everytime the user open the page)
         updateToken();
@@ -175,9 +197,6 @@ export const AuthProvider = () => {
       }, tenMinutes);
       // Clearing interval
       return () => clearInterval(interval);
-    }
-    else {
-      console.log("This url does not need token updating")
     }
   }, [authTokens, loading, location]);
 
