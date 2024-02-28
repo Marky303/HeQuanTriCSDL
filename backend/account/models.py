@@ -49,10 +49,15 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
         return self.name
     
     def __str__(self):
-        return self.email
+        return self.name
     
+# Importing usermodel to foreignkey to
+from account.models import UserAccount     
+
 # Note model for post testing
 class Note(models.Model):
+    # Foreign key
+    user = models.ForeignKey(UserAccount, on_delete=models.CASCADE, null=True)
     body = models.TextField()
     
     def __str__(self):

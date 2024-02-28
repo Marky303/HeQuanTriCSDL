@@ -23,6 +23,7 @@ This template has *basic* features/functionalities for a **user authentication**
 ```
 ## 3.Notes/Attention
 - Customized emails can be modified in backend/account/templates/emails and backend/account/email.py (and settings.py)
+- Create superuser using "python manage.py superuser" (when inside of backend) to create superuser (nhien/1234)
 
 ## 4.Features to be added
 Additional features to be added to this template:

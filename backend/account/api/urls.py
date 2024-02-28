@@ -5,6 +5,7 @@ from . import views
 
 # Setting up urls patterns
 urlpatterns = [
-    # Getting notes view
-    path('', views.getNotes)
+    # Note example url
+    path('getNotes/', views.getNotes)
+    
 ]
