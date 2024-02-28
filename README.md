@@ -34,7 +34,7 @@ All the features that have been added to this template
 ## 5.Features to be added
 Additional features to be added to this template:
 - ~~Fix private routes /singup and /resetpassword keep redirecting back to login~~
-- ~~Create a new user~~ ~~User activation and login is a bit buggy (Wait until function is executed) maybe find out about Django debug server being a lil buggy idk ~~
+- ~~Create a new user~~
 - ~~Add basic graphics:~~ ~~Navbar~~, ~~Login page~~
     + ~~Navbar: Logo (Link to home) + Search area (blank) + Userauth interactions~~
     + ~~Login page: Login prompt + Form (with good border-radius) + Login button + Link to forgot password, register~~
