@@ -1,7 +1,6 @@
-import { createContext, useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { createContext, useState, useEffect  } from "react";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom"; // useHistory is replaced by use navigate
 import axios from "axios";
 
 // Create a new context
@@ -21,6 +20,8 @@ export const AuthProvider = () => {
   let [loading, setLoading] = useState(true);
 
   let navigate = useNavigate();
+
+  let location = useLocation();
 
   // Creating login function as a context to pass it to login page
   let loginUser = async (e) => {
