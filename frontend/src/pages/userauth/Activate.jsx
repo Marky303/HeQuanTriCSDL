@@ -27,7 +27,7 @@ const Activate = () => {
   ) : (
     <div className="activate-form-cont">
       <p className="activate-user-prompt">
-        Your account has been successfully created
+        Your account has been successfully created!
       </p>
       <p className="activate-ty-prompt">Thank you for choosing our website</p>
     </div>

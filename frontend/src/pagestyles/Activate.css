@@ -1,7 +1,7 @@
 .activate-form-cont {
   background-color: rgb(203, 203, 203);
   width: 30dvw;
-  height: 30dvh;
+  height: 27dvh;
   border-radius: 2.8dvh;
   margin: auto;
   margin-top: 25dvh;
@@ -17,8 +17,7 @@
 .activate-ty-prompt {
   font-size: 3dvh;
   text-align: center;
-  margin-top: 0dvh;
-  cursor: pointer;
+  margin-top: 0.8dvh;
   transition: opacity font-size 0.15s;
 }
 
