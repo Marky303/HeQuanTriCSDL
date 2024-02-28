@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect  } from "react";
+import { createContext, useState, useEffect } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
@@ -46,7 +46,7 @@ export const AuthProvider = () => {
     if (response.status == 200) {
       setauthTokens(data);
       localStorage.setItem("authTokens", JSON.stringify(data));
-      navigate("/");
+      navigate("/dash");
     }
     // Notify if login unsuccessful
     else {
@@ -153,21 +153,33 @@ export const AuthProvider = () => {
   };
 
   useEffect(() => {
-    // Check if the user is loading into page(refresh the token everytime the user open the page)
-    if (loading) {
-      updateToken();
-    }
-    // updateToken will be called every 10 minutes
-    let tenMinutes = 1000 * 60 * 10 - 1;
-    // Declare interval id as "interval" then clear it at the end in order not to multiply (1,2,4,8,16,...)
-    let interval = setInterval(() => {
-      if (authTokens) {
+    // Url regexs that needs token updating
+    let dashRegex = /dash/g;
+
+    // Check if this route need token updating
+    if (dashRegex.test(location.pathname)) {
+      //Test 
+      console.log("This page needs token refreshing")
+
+      if (loading) {
+        // Check if the user is loading into page(refresh the token everytime the user open the page)
         updateToken();
       }
-    }, tenMinutes);
-    // Clearing interval
-    return () => clearInterval(interval);
-  }, [authTokens, loading]);
+      // updateToken will be called every 10 minutes
+      let tenMinutes = 1000 * 60 * 10 - 1;
+      // Declare interval id as "interval" then clear it at the end in order not to multiply (1,2,4,8,16,...)
+      let interval = setInterval(() => {
+        if (authTokens) {
+          updateToken();
+        }
+      }, tenMinutes);
+      // Clearing interval
+      return () => clearInterval(interval);
+    }
+    else {
+      console.log("This url does not need token updating")
+    }
+  }, [authTokens, loading, location]);
 
   // Passing your context data here (including arguments/functions)
   // Nested elements are rendered using <Outlet /> tag (using nested routers)

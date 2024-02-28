@@ -16,7 +16,7 @@ const Login = () => {
 
   // Calling loginUser function upon submitting form
   return authTokens ? (
-    <Navigate to="/" />
+    <Navigate to="/dash" />
   ) : (
     <div className="login-form-cont">
       <p className="login-form-prompt">Login</p>

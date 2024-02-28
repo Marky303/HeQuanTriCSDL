@@ -23,7 +23,7 @@ const Activate = () => {
   });
 
   return authTokens ? (
-    <Navigate to="/" />
+    <Navigate to="/dash" />
   ) : (
     <div className="activate-form-cont">
       <p className="activate-user-prompt">

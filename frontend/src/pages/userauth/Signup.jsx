@@ -15,7 +15,7 @@ const Signup = () => {
   let { signupUser } = useContext(AuthContext);
 
   return authTokens ? (
-    <Navigate to="/" />
+    <Navigate to="/dash" />
   ) : (
     <div className="signup-form-cont">
       <p className="signup-form-prompt">Sign Up</p>
