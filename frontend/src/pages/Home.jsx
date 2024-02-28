@@ -11,13 +11,13 @@ const Home = () => {
   let [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    getNotes()
+    getNotes();
   }, []);
 
   let getNotes = async () => {
     let response = await fetch("http://localhost:8000/notes/getNotes/", {
       method: "GET",
-      header: {
+      headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + String(authTokens.access),
       },
