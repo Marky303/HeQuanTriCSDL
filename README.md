@@ -32,8 +32,9 @@ Additional features to be added to this template:
     + ~~Navbar: Logo (Link to home) + Search area (blank) + Userauth interactions~~
     + ~~Login page: Login prompt + Form (with good border-radius) + Login button + Link to forgot password, register~~
 - ~~Add redirect back to /home from /login after logged in~~ 
-- Add advanced page layout graphics
+- Add advanced page layout graphics (what even is that)
 - ~~Change /dash to be the private route path~~
-- Add reset password
+- ~~Add reset password~~
 - ~~Add loading to page~~
 - ~~Account activation successful alert (what the ~~fuck~~ is wrong with the activation site)~~
+- Simple note example 
