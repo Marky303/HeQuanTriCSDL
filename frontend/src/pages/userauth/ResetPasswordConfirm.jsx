@@ -1,20 +1,50 @@
-import React, { useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
 
 // Importing style
-// import "../../pagestyles/Signup.css";
+import "../../pagestyles/ResetPasswordConfirm.css";
 
-// Importing AuthContext (signup function) for signup page
+// Importing AuthContext (resetpasswordconfirm function) for resetpasswordconfirm page
 import AuthContext from "../../context/UserauthContext";
 
 const ResetPasswordConfirm = () => {
   // Implement if authorized
   let { authTokens } = useContext(AuthContext);
 
+  // Get params from url
+  const { uid, token } = useParams();
+
+  // Get function from Context
+  let { resetPassword } = useContext(AuthContext);
+
   return authTokens ? (
     <Navigate to="/dash" />
   ) : (
-    <div className="resetp-form-cont">reset pass page</div>
+    <div className="resetpasswordconfirm-form-cont">
+      <p className="resetpasswordconfirm-form-prompt">Reset your password</p>
+      <hr className="resetpasswordconfirm-form-line"></hr>
+      <form className="resetpasswordconfirm-form" onSubmit={resetPassword}>
+        <p className="form-spec">Password</p>
+        <input
+          className="form-input"
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+        />
+        <p className="form-spec">Password confirmation</p>
+        <input
+          className="form-input"
+          type="password"
+          name="repassword"
+          placeholder="Re-enter your password"
+        />
+        <input type="hidden" name="uid" value={uid}/>
+        <input type="hidden" name="token" value={token}/>
+        <button className="resetpasswordconfirm-submit-btn" type="submit">
+          Accept
+        </button>
+      </form>
+    </div>
   );
 };
 

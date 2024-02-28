@@ -144,22 +144,65 @@ export const AuthProvider = () => {
     e.preventDefault();
 
     // Posting to server and get response
-    let response = await fetch("http://localhost:8000/auth/users/reset_password/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Set email to send
-      body: JSON.stringify({
-        email: e.target.email.value,
-      }),
-    });
+    let response = await fetch(
+      "http://localhost:8000/auth/users/reset_password/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Set email to send
+        body: JSON.stringify({
+          email: e.target.email.value,
+        }),
+      }
+    );
     if (response.status == 204) {
-      alert("Password reset email has been sent!")
+      alert("Password reset email has been sent!");
+    } else {
+      alert("Cannot find email");
     }
-    else 
-    {
-      alert("Cannot find email")
+  };
+
+  let resetPassword = async (e) => {
+    e.preventDefault();
+
+    let acceptable = true;
+
+    if (e.target.password.value.length <= 6) {
+      acceptable = false;
+    }
+    if (e.target.password.value != e.target.repassword.value) {
+      acceptable = false;
+    }
+
+    // Check if 2 fields are the same because Djoser doesnt check this somehow
+    if (acceptable) {
+      // Posting to server and get response
+      let response = await fetch(
+        "http://localhost:8000/auth/users/reset_password_confirm/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // Set fields to send
+          body: JSON.stringify({
+            uid: e.target.uid.value,
+            token: e.target.token.value,
+            new_password: e.target.password.value,
+            re_new_password: e.target.repassword.value,
+          }),
+        }
+      );
+      if (response.status == 204) {
+        alert("Password reset successfully!");
+        navigate("/login");
+      } else {
+        alert("Something went wrong");
+      }
+    } else {
+      alert("New password criteria isn't met!");
     }
   };
 
@@ -175,6 +218,7 @@ export const AuthProvider = () => {
     activateUser: activateUser,
     updateToken: updateToken,
     sendResetRequest: sendResetRequest,
+    resetPassword: resetPassword,
   };
 
   useEffect(() => {
