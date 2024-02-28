@@ -23,18 +23,7 @@ class UserAccountManager(BaseUserManager):
     
     # Incase you need that
     def create_superuser(self):
-        # Normalizer normalizing email (lowercasing,...) 
-        user = self.model(email="nhien", name="nhien")
-        
-        # Hashing password for security reasons
-        user.set_password("1234")
-        
-        # Changing superuser flag
-        user.is_superuser = True
-        
-        # Finally save the user
-        user.save()
-        return user
+        pass
 
 # Custom user model goes here.
 class UserAccount(AbstractBaseUser, PermissionsMixin):
