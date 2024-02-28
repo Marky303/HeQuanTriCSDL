@@ -26,10 +26,14 @@ This template has *basic* features/functionalities for a **user authentication**
 
 ## 4.Features to be added
 Additional features to be added to this template:
-- Fix private routes /singup and /resetpassword keep redirecting back to login
+- ~~Fix private routes /singup and /resetpassword keep redirecting back to login~~
 - ~~Create a new user~~ User activation and login is a bit buggy (Wait until function is executed) maybe find out about Django debug server being a lil buggy idk 
 - Reset password
-- Add basic graphics: ~~Navbar~~, ~~Login page~~, Page layout
+- Add basic graphics: ~~Navbar~~, ~~Login page~~
     + ~~Navbar: Logo (Link to home) + Search area (blank) + Userauth interactions~~
     + ~~Login page: Login prompt + Form (with good border-radius) + Login button + Link to forgot password, register~~
 - ~~Add redirect back to /home from /login after logged in~~ 
+- Add advanced page layout graphics
+- Change /dash to be the private route path
+- Add reset password
+- Add loading to page
