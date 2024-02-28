@@ -63,12 +63,12 @@ MIDDLEWARE = [
 ]
 
 # Corsheaders config
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Allow react hosted port
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",
+# ]
 
 # Email for verification                                                               ***
 # nhienhuu303@gmail.com / imyx pegp moiv ambk

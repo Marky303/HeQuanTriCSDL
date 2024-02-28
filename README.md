@@ -24,6 +24,7 @@ This template has *basic* features/functionalities for a **user authentication**
 ## 3.Notes/Attention
 - Customized emails can be modified in backend/account/templates/emails and backend/account/email.py (and settings.py)
 - Create superuser using "python manage.py superuser" (when inside of backend) to create superuser (nhien/1234)
+- Global hosting can be achived by using "ngrok http http://localhost:5173" and CORS_ALLOW_ALL_ORIGINS set to True
 
 ## 4.Features to be added
 Additional features to be added to this template:
