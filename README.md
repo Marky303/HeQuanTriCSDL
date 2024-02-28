@@ -37,3 +37,4 @@ Additional features to be added to this template:
 - Change /dash to be the private route path
 - Add reset password
 - Add loading to page
+- Account activation successful alert (what the ~~fuck~~ is wrong with the activation site)

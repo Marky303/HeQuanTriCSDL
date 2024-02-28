@@ -110,22 +110,33 @@ export const AuthProvider = () => {
         token: token,
       }),
     });
-    let data = await response.json();
-
-    if (response.status == 204) {
-      alert("User activation successful")
-      navigate("/login");
-    }
-    // Notify if activation unsuccessful
-    else {
-      // TODO better notification
-      let detail = JSON.stringify(data);
-      alert(detail);
-    }
   };
 
   // Getting refreshed token (...yes, pass it to whatever page)
-  let updateToken = async () => {};
+  let updateToken = async () => {
+    // Posting to server and get response
+    let response = await fetch("http://localhost:8000/auth/jwt/refresh/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refresh: authTokens?.refresh }),
+    });
+    let data = await response.json();
+    // If refresh successfully
+    if (response.status === 200) {
+      // Setting (and decoding) token info for variables
+      setauthTokens(data);
+      localStorage.setItem("authTokens", JSON.stringify(data));
+    }
+    // If refresh unsuccessfully
+    else {
+      logoutUser();
+    }
+    if (loading) {
+      setLoading(false);
+    }
+  };
 
   // Declaring context data to pass to other components
   let contextData = {
@@ -137,7 +148,25 @@ export const AuthProvider = () => {
     logoutUser: logoutUser,
     signupUser: signupUser,
     activateUser: activateUser,
+    updateToken: updateToken,
   };
+
+  useEffect(() => {
+    // Check if the user is loading into page(refresh the token everytime the user open the page)
+    if (loading) {
+      updateToken();
+    }
+    // updateToken will be called every 10 minutes
+    let tenMinutes = 1000 * 60 * 10 - 1;
+    // Declare interval id as "interval" then clear it at the end in order not to multiply (1,2,4,8,16,...)
+    let interval = setInterval(() => {
+      if (authTokens) {
+        updateToken();
+      }
+    }, tenMinutes);
+    // Clearing interval
+    return () => clearInterval(interval);
+  }, [authTokens, loading]);
 
   // Passing your context data here (including arguments/functions)
   // Nested elements are rendered using <Outlet /> tag (using nested routers)
