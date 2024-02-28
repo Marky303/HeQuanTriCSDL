@@ -6,6 +6,7 @@ This template has *basic* features/functionalities for a **user authentication**
 ## 2.Installed packages
 ### 2a.Backend
 > [!WARNING]
+> Remember to create virtualenv using **virtualenv env** before installing these packages
 > Remember to enter virtualenv using **env\Scripts\activate** before installing these packages
 ```
     pip install djangorestframework djangorestframework-simplejwt django-cors-headers djoser
