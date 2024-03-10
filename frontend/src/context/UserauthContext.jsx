@@ -153,6 +153,8 @@ export const AuthProvider = () => {
   let sendResetRequest = async (e) => {
     e.preventDefault();
 
+    setFetching((fetching = true));
+
     // Posting to server and get response
     let response = await fetch(
       "http://localhost:8000/auth/users/reset_password/",
@@ -167,6 +169,9 @@ export const AuthProvider = () => {
         }),
       }
     );
+
+    setFetching((fetching = false));
+
     if (response.status == 204) {
       alert("Password reset email has been sent!");
     } else {
