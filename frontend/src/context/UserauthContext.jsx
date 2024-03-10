@@ -15,6 +15,8 @@ export const AuthProvider = () => {
       : null
   );
 
+  let [fetching, setFetching] = useState(false);
+
   let [loading, setLoading] = useState(true);
 
   let navigate = useNavigate();
@@ -26,6 +28,9 @@ export const AuthProvider = () => {
     // PREVENT PAGE RELOAD ON FORM SUBMIT SOMEHOW IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     // IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     e.preventDefault();
+
+    // Setting login to true
+    setFetching((fetching = true));
 
     // Posting to server and get response
     let response = await fetch("http://localhost:8000/auth/jwt/create/", {
@@ -40,6 +45,9 @@ export const AuthProvider = () => {
       }),
     });
     let data = await response.json();
+
+    // Setting login to false
+    setFetching((fetching = false));
 
     if (response.status == 200) {
       setauthTokens(data);
@@ -58,6 +66,8 @@ export const AuthProvider = () => {
   let signupUser = async (e) => {
     e.preventDefault();
 
+    setFetching((fetching = true));
+
     // Posting to server and get response
     let response = await fetch("http://localhost:8000/auth/users/", {
       method: "POST",
@@ -73,6 +83,8 @@ export const AuthProvider = () => {
       }),
     });
     let data = await response.json();
+
+    setFetching((fetching = false));
 
     if (response.status == 201) {
       // TODO better signup redirection
@@ -208,6 +220,7 @@ export const AuthProvider = () => {
   let contextData = {
     // userauth related variables
     authTokens: authTokens,
+    fetching: fetching,
 
     // userauth related functions
     loginUser: loginUser,

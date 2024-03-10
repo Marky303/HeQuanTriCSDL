@@ -23,6 +23,10 @@
     margin-bottom: 3dvh;
 }
 
+.form-disabled {
+    display: grid;
+}
+
 .login-form {
     display: grid;
 }
