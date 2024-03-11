@@ -64,7 +64,7 @@ export const AuthProvider = () => {
     if (response.status == 200) {
       setauthTokens(data);
       localStorage.setItem("authTokens", JSON.stringify(data));
-      navigate("/dash");
+      navigate("/");
 
       // Get user information after logging in
       getUserinfo(true);
@@ -314,11 +314,21 @@ export const AuthProvider = () => {
   };
 
   useEffect(() => {
-    // Url regexs that needs token updating
-    let dashRegex = /dash/g;
+    // Url regexs that does NOT token updating
+    let loginRegex = /login/g;
+    let signupRegex = /signup/g;
+    let passwordRegex = /password/g;
+    let activateRegex = /activate/g;
 
     // Check if this route need token updating
-    if (dashRegex.test(location.pathname)) {
+    if (
+      !(
+        loginRegex.test(location.pathname) ||
+        signupRegex.test(location.pathname) ||
+        passwordRegex.test(location.pathname) ||
+        activateRegex.test(location.pathname)
+      )
+    ) {
       if (loading) {
         // Check if the user is loading into page(refresh the token everytime the user open the page)
         updateToken();

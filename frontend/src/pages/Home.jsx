@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     getNotes();
-  }, []);
+  }, [authTokens]);
 
   let getNotes = async () => {
     let response = await fetch("http://localhost:8000/account/getnotes/", {
