@@ -17,13 +17,14 @@ This template has *basic* features/functionalities for a **user authentication**
 > [!WARNING]
 > Remember to enter frontend folder using **cd frontend** before installing these packages
 ```
-    npm install react-router-dom
+    npm install react-router-dom react-toastify
 ```
 ## 3.Notes/Attention
 - Customized emails can be modified in backend/account/templates/emails and backend/account/email.py (and settings.py)
 - Django data can be deleted using "python manage.py flush"
 - Create superuser using "python manage.py createsupauser" (after cd into backend) to create superuser (credentials: nhien/1234)
 - Global hosting can be achived by using "ngrok http http://localhost:5173" and CORS_ALLOW_ALL_ORIGINS set to True
+- Notification (Toastify) config can be found and changed in NotifyContext.jsx
 
 ## 4.All features
 All the features that have been added to this template
