@@ -24,7 +24,7 @@ const Login = () => {
 
   // Calling loginUser function upon submitting form
   return authTokens ? (
-    <Navigate to="/dash" />
+    <Navigate to="/" />
   ) : (
     <div className="userauth-page-wrapper">
       <img className="userauth-bg" src={background}></img>

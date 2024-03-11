@@ -36,19 +36,39 @@ const Navbar = () => {
 
   return (
     <div className="navbar-cont">
-      <Link to="/" className="home-link-cont">
+      <Link to={authTokens ? "/" : "/home"} className="home-link-cont">
         <img className="logo-pic" src={logo}></img>
         <p className="app-name">App name</p>
       </Link>
 
       <div className="search-cont">
-        <p className="placeholder-text">This is a search bar</p>
+        {authTokens ? (
+          <p className="placeholder-text">Navbar when logged in!</p>
+        ) : (
+          <div className="nouser-content-cont">
+            <div className="filler"></div>
+            <div className="nouser-button-cont">
+              <a className="navbar-anchor" href="/contacts">
+                <button className="navbar-anchor-btn">Contacts</button>
+              </a>
+              <a className="navbar-anchor" href="/learn">
+                <button className="navbar-anchor-btn">Learn more</button>
+              </a>
+              <a className="navbar-anchor" href="/products">
+                <button className="navbar-anchor-btn">Products</button>
+              </a>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="userauth-wrapper">
         {authTokens ? (
           <div className="auth-view-cont">
-            <p className="welcome-text"> Hello {userInfo? userInfo.name : ""}! </p>
+            <p className="welcome-text">
+              {" "}
+              Hello {userInfo ? userInfo.name : ""}!{" "}
+            </p>
             <button className="logout-btn" onClick={logoutUser}>
               Logout
             </button>
