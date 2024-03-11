@@ -18,11 +18,11 @@ export const NotifyProvider = () => {
     // Set toastify config
     let toastConfig = {
       position: "bottom-right",
-      autoClose: 4000,
+      autoClose: 3800,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: false,
-      draggable: false,
+      draggable: true,
       progress: undefined,
       theme: "light",
     };
@@ -59,8 +59,6 @@ export const NotifyProvider = () => {
   };
 
   return (
-    // If loading is true, render nothing, else render everything as normal
-    // TODO add loading ***
     <NotifyContext.Provider value={contextData}>
       {<Outlet />}
     </NotifyContext.Provider>

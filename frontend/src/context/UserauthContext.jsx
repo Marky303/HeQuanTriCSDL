@@ -71,8 +71,12 @@ export const AuthProvider = () => {
     }
     // Notify if login unsuccessful
     else {
-      let detail = JSON.stringify(data);
-      notify("error", detail);
+      let message = data.detail
+        ? data.detail
+        : data.email
+        ? "Email field cannot be blank"
+        : "Password field cannot be blank";
+      notify("error", message);
     }
   };
 
@@ -95,10 +99,9 @@ export const AuthProvider = () => {
       setuserInfo(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       // Display welcome back notification
-      if (isLogin) 
-      {
+      if (isLogin) {
         let welcomeMsg = "Welcome back, " + data.name;
-        notify("success", welcomeMsg)
+        notify("success", welcomeMsg);
       }
     } else {
       // Logout if cannot get user information
@@ -109,6 +112,19 @@ export const AuthProvider = () => {
   // Creating signup function to pass it to signup page
   let signupUser = async (e) => {
     e.preventDefault();
+
+    // Check for blank fields
+    if (
+      !(
+        e.target.email.value &&
+        e.target.username.value &&
+        e.target.password.value &&
+        e.target.repassword.value
+      )
+    ) {
+      notify("warning", "Field(s) may not be blank!");
+      return;
+    }
 
     setFetching((fetching = true));
 
@@ -136,8 +152,16 @@ export const AuthProvider = () => {
     }
     // Notify if signup unsuccessful
     else {
-      let detail = JSON.stringify(data);
-      notify("error", detail);
+      let message = data.name
+        ? data.name[0]
+        : data.email
+        ? data.email[0]
+        : data.password
+        ? data.password[0]
+        : data.re_password
+        ? data.re_password[0]
+        : data.non_field_errors[0];
+      notify("error", message);
     }
   };
 
