@@ -1,5 +1,8 @@
-import { createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
+
+// Importing NotifyContext to get notify function
+import NotifyContext from "./NotifyContext";
 
 // Create a new context
 const AuthContext = createContext();
@@ -7,6 +10,9 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = () => {
+  // Get notify function
+  let { notify } = useContext(NotifyContext);
+
   // Get and set authTokens variable if it is saved in localStorage
   // Preventing logging out when reloading page
   let [authTokens, setauthTokens] = useState(() =>
@@ -29,7 +35,7 @@ export const AuthProvider = () => {
     // IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     e.preventDefault();
 
-    // Setting login to true
+    // Setting loading to true
     setFetching((fetching = true));
 
     // Posting to server and get response
@@ -46,7 +52,7 @@ export const AuthProvider = () => {
     });
     let data = await response.json();
 
-    // Setting login to false
+    // Setting loading to false
     setFetching((fetching = false));
 
     if (response.status == 200) {
@@ -56,9 +62,8 @@ export const AuthProvider = () => {
     }
     // Notify if login unsuccessful
     else {
-      // TODO better notification
       let detail = JSON.stringify(data);
-      alert(detail);
+      notify("error", detail)
     }
   };
 

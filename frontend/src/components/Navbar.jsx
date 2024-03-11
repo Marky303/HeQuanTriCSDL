@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Importing style
 import "../pagestyles/Navbar.css";
@@ -8,14 +8,28 @@ import "../pagestyles/Navbar.css";
 import logo from "../assets/logo.jpg";
 
 // Importing context
-import AuthContext from "../context/UserauthContext";
+import AuthContext from "../context/UserauthContext.jsx";
+import NotifyContext from "../context/NotifyContext";
+
+// Importing toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   // Implement if authorized
   let { authTokens } = useContext(AuthContext);
 
-  // get logout function
+  // Get logout function
   let { logoutUser } = useContext(AuthContext);
+
+  // Get notification from NotifyContext
+  let { notification, notifContent } = useContext(NotifyContext);
+
+  // Notification
+  useEffect(() => {
+    const notify = () => toast(notifContent);
+    notify();
+  }, [notification, notifContent]);
 
   return (
     <div className="navbar-cont">
@@ -45,6 +59,7 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      {notification}
     </div>
   );
 };
