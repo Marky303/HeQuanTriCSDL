@@ -48,7 +48,7 @@ const Navbar = () => {
       <div className="userauth-wrapper">
         {authTokens ? (
           <div className="auth-view-cont">
-            <p className="welcome-text"> Hello {userInfo.name}! </p>
+            <p className="welcome-text"> Hello! </p>
             <button className="logout-btn" onClick={logoutUser}>
               Logout
             </button>
