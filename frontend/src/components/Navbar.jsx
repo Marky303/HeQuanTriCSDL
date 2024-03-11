@@ -28,7 +28,7 @@ const Navbar = () => {
   // Get notification from NotifyContext
   let { notification } = useContext(NotifyContext);
 
-  // Notification
+  // Display when theres a notification
   useEffect(() => {
     // Note that no parenthesis is used here
     notification;
@@ -48,7 +48,7 @@ const Navbar = () => {
       <div className="userauth-wrapper">
         {authTokens ? (
           <div className="auth-view-cont">
-            <p className="welcome-text"> Hello! </p>
+            <p className="welcome-text"> Hello {userInfo? userInfo.name : ""}! </p>
             <button className="logout-btn" onClick={logoutUser}>
               Logout
             </button>
