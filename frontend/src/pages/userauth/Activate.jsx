@@ -4,6 +4,9 @@ import { Link, Navigate, useParams } from "react-router-dom";
 // Importing styles
 import "../../pagestyles/Activate.css";
 
+// Importing assets
+import background from "../../assets/userauthbg.webp";
+
 // Importing AuthContext (login function) for login page
 import AuthContext from "../../context/UserauthContext";
 
@@ -25,11 +28,14 @@ const Activate = () => {
   return authTokens ? (
     <Navigate to="/dash" />
   ) : (
-    <div className="activate-form-cont">
-      <p className="activate-user-prompt">
-        Your account has been successfully created!
-      </p>
-      <p className="activate-ty-prompt">Thank you for choosing our website</p>
+    <div className="userauth-page-wrapper">
+      <img className="userauth-bg" src={background}></img>
+      <div className="activate-form-cont">
+        <p className="activate-user-prompt">
+          Your account has been successfully created!
+        </p>
+        <p className="activate-ty-prompt">Thank you for choosing our website</p>
+      </div>
     </div>
   );
 };
