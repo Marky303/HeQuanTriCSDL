@@ -315,10 +315,15 @@ export const AuthProvider = () => {
 
   useEffect(() => {
     // Url regexs that does NOT token updating
+    // TODO: find a better way to implement this
     let loginRegex = /login/g;
     let signupRegex = /signup/g;
     let passwordRegex = /password/g;
     let activateRegex = /activate/g;
+    let openingRegex = /home/g;
+    let contactsRegex = /contacts/g;
+    let learnRegex = /learn/g;
+    let productsRegex = /products/g;
 
     // Check if this route need token updating
     if (
@@ -326,7 +331,11 @@ export const AuthProvider = () => {
         loginRegex.test(location.pathname) ||
         signupRegex.test(location.pathname) ||
         passwordRegex.test(location.pathname) ||
-        activateRegex.test(location.pathname)
+        activateRegex.test(location.pathname) ||
+        openingRegex.test(location.pathname) ||
+        contactsRegex.test(location.pathname) ||
+        learnRegex.test(location.pathname) ||
+        productsRegex.test(location.pathname)
       )
     ) {
       if (loading) {

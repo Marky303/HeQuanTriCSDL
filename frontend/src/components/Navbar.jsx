@@ -42,13 +42,20 @@ const Navbar = () => {
       </Link>
 
       <div className="search-cont">
-        <p className="placeholder-text">This is a search bar</p>
+        {authTokens ? (
+          <p className="placeholder-text">Navbar when logged in!</p>
+        ) : (
+          <p className="placeholder-text">Navbar when not logged in!</p>
+        )}
       </div>
 
       <div className="userauth-wrapper">
         {authTokens ? (
           <div className="auth-view-cont">
-            <p className="welcome-text"> Hello {userInfo? userInfo.name : ""}! </p>
+            <p className="welcome-text">
+              {" "}
+              Hello {userInfo ? userInfo.name : ""}!{" "}
+            </p>
             <button className="logout-btn" onClick={logoutUser}>
               Logout
             </button>

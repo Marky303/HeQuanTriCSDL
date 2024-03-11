@@ -7,7 +7,13 @@ import { AuthProvider } from "./context/UserauthContext";
 // AuthContext calls function from NotifyContext -> NotifyProvider wraps AuthProvider
 import { NotifyProvider } from "./context/NotifyContext";
 
-// Importing main page
+// Importing introduction related pages
+import Opening from "./pages/home/Opening";
+import Contacts from "./pages/home/Contacts";
+import Learn from "./pages/home/Learn";
+import Products from "./pages/home/Products";
+
+// Importing main page (private route)
 import Home from "./pages/Home";
 
 // Importing userath related pages
@@ -40,6 +46,10 @@ const App = () => (
               path="/password/reset/confirm/:uid/:token"
               element={<ResetPasswordConfirm />}
             />
+            <Route exact path="/home" element={<Opening />} />
+            <Route exact path="/contacts" element={<Contacts />} />
+            <Route exact path="/learn" element={<Learn />} />
+            <Route exact path="/products" element={<Products />} />
           </Route>
         </Route>
       </Route>
