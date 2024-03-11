@@ -23,13 +23,13 @@ const Navbar = () => {
   let { logoutUser } = useContext(AuthContext);
 
   // Get notification from NotifyContext
-  let { notification, notifContent } = useContext(NotifyContext);
+  let { notification } = useContext(NotifyContext);
 
   // Notification
   useEffect(() => {
-    const notify = () => toast(notifContent);
-    notify();
-  }, [notification, notifContent]);
+    // Note that no parenthesis is used here
+    notification;
+  }, [notification]);
 
   return (
     <div className="navbar-cont">
@@ -59,7 +59,7 @@ const Navbar = () => {
           </div>
         )}
       </div>
-      {notification}
+      <ToastContainer />
     </div>
   );
 };

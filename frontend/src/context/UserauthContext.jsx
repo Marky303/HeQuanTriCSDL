@@ -59,11 +59,13 @@ export const AuthProvider = () => {
       setauthTokens(data);
       localStorage.setItem("authTokens", JSON.stringify(data));
       navigate("/dash");
+      // TODO: get username
+      notify("success", "logged in!");
     }
     // Notify if login unsuccessful
     else {
       let detail = JSON.stringify(data);
-      notify("error", detail)
+      notify("error", detail);
     }
   };
 
@@ -92,17 +94,14 @@ export const AuthProvider = () => {
     setFetching((fetching = false));
 
     if (response.status == 201) {
-      // TODO better signup redirection
-      alert(
-        "User created successfully, please check your email for account activation"
-      );
+      notify("success", "User created successfully, please check your email.");
       navigate("/login");
     }
     // Notify if signup unsuccessful
     else {
       // TODO better notification
       let detail = JSON.stringify(data);
-      alert(detail);
+      notify("error", detail);
     }
   };
 
@@ -110,6 +109,7 @@ export const AuthProvider = () => {
   let logoutUser = () => {
     setauthTokens(null);
     localStorage.removeItem("authTokens");
+    notify("warning", "Logged out.")
     navigate("/login");
   };
 
@@ -148,6 +148,7 @@ export const AuthProvider = () => {
     // If refresh unsuccessfully
     else {
       logoutUser();
+      notify("error", "Something happened, please log in.");
     }
     if (loading) {
       setLoading(false);
@@ -178,14 +179,16 @@ export const AuthProvider = () => {
     setFetching((fetching = false));
 
     if (response.status == 204) {
-      alert("Password reset email has been sent!");
+      notify("success", "Password reset request has been sent!");
     } else {
-      alert("Cannot find email");
+      notify("error", "Cannot find specified email!");
     }
   };
 
   let resetPassword = async (e) => {
     e.preventDefault();
+
+    setFetching((fetching = true));
 
     let acceptable = true;
 
@@ -215,15 +218,18 @@ export const AuthProvider = () => {
           }),
         }
       );
+
       if (response.status == 204) {
-        alert("Password reset successfully!");
+        notify("success", "Password has been changed.")
         navigate("/login");
       } else {
-        alert("Something went wrong");
+        notify("error", "Cannot change password, please retry!")
       }
     } else {
-      alert("New password criteria isn't met!");
+      notify("warning", "New password criteria isn't met!")
     }
+
+    setFetching((fetching = false));
   };
 
   // Declaring context data to pass to other components

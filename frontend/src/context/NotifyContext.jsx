@@ -14,41 +14,46 @@ export const NotifyProvider = () => {
   // Context contents
   let [notification, setNotification] = useState();
 
-  let [notifContent, setNotifContent] = useState();
-
   let notify = (status, content) => {
-    // Do something
-    console.log("status is: ", status);
-    console.log("content is:", content);
+    // Set toastify config
+    let toastConfig = {
+      position: "bottom-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    };
 
     // Change notification and notification content
+    // TODO: better way to call function based on status
     setNotification(
       (notification = () => {
-        return (
-          <ToastContainer
-            position="bottom-right"
-            autoClose={4000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss={false}
-            draggable={false}
-            pauseOnHover={false}
-            theme="light"
-            transition:Slide
-          />
-        );
+        switch (status) {
+          case "info":
+            toast.info(content, toastConfig);
+            break;
+          case "success":
+            toast.success(content, toastConfig);
+            break;
+          case "warning":
+            toast.warning(content, toastConfig);
+            break;
+          case "error":
+            toast.error(content, toastConfig);
+            break;
+          case "default":
+            toast(content, toastConfig);
+        }
       })
     );
-
-    setNotifContent((notifContent = content));
   };
 
   let contextData = {
     // notification related variables
     notification: notification,
-    notifContent: notifContent,
     // notification related functions
     notify: notify,
   };
