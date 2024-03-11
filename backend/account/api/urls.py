@@ -6,6 +6,6 @@ from . import views
 # Setting up urls patterns
 urlpatterns = [
     # Note example url
-    path('getNotes/', views.getNotes)
-    
+    path('getnotes/', views.getNotes),
+    path('getuserinfo/', views.getUserinfo),
 ]

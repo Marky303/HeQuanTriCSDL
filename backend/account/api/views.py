@@ -1,9 +1,16 @@
 # Note example
-from account.models import Note
-from .serializers import NoteSerializer
+from .serializers import NoteSerializer, UserinfoSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+
+# Get username view (can be modified to get user information)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getUserinfo(request):
+    user = request.user
+    serializer = UserinfoSerializer(user)
+    return Response(serializer.data)
 
 # Example: get all notes of a certain user
 @api_view(['GET'])

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Importing style
 import "../pagestyles/Navbar.css";
@@ -8,14 +8,31 @@ import "../pagestyles/Navbar.css";
 import logo from "../assets/logo.jpg";
 
 // Importing context
-import AuthContext from "../context/UserauthContext";
+import AuthContext from "../context/UserauthContext.jsx";
+import NotifyContext from "../context/NotifyContext";
+
+// Importing toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   // Implement if authorized
   let { authTokens } = useContext(AuthContext);
 
-  // get logout function
+  // Getting user information
+  let { userInfo } = useContext(AuthContext);
+
+  // Get logout function
   let { logoutUser } = useContext(AuthContext);
+
+  // Get notification from NotifyContext
+  let { notification } = useContext(NotifyContext);
+
+  // Display when theres a notification
+  useEffect(() => {
+    // Note that no parenthesis is used here
+    notification;
+  }, [notification]);
 
   return (
     <div className="navbar-cont">
@@ -31,7 +48,7 @@ const Navbar = () => {
       <div className="userauth-wrapper">
         {authTokens ? (
           <div className="auth-view-cont">
-            <p className="welcome-text"> Hello user! </p>
+            <p className="welcome-text"> Hello {userInfo? userInfo.name : ""}! </p>
             <button className="logout-btn" onClick={logoutUser}>
               Logout
             </button>
@@ -45,6 +62,7 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };
