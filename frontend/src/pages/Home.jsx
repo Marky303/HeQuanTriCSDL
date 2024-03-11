@@ -15,7 +15,7 @@ const Home = () => {
   }, []);
 
   let getNotes = async () => {
-    let response = await fetch("http://localhost:8000/notes/getNotes/", {
+    let response = await fetch("http://localhost:8000/account/getnotes/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

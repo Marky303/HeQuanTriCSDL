@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Importing provider to "provide" information to all components in the application
 import { AuthProvider } from "./context/UserauthContext";
 
+// AuthContext calls function from NotifyContext -> NotifyProvider wraps AuthProvider
+import { NotifyProvider } from "./context/NotifyContext";
+
 // Importing main page
 import Home from "./pages/Home";
 
@@ -24,18 +27,20 @@ import Layout from "./hocs/Layout.jsx";
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route exact path="/" element={<AuthProvider />}>
-        <Route path="/" element={<Layout />}>
-          <Route exact path="/dash" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/activate/:uid/:token" element={<Activate />} />
-          <Route exact path="/resetpassword" element={<ResetPassword />} />
-          <Route
-            exact
-            path="/password/reset/confirm/:uid/:token"
-            element={<ResetPasswordConfirm />}
-          />
+      <Route exact path="/" element={<NotifyProvider />}>
+        <Route exact path="/" element={<AuthProvider />}>
+          <Route path="/" element={<Layout />}>
+            <Route exact path="/dash" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/activate/:uid/:token" element={<Activate />} />
+            <Route exact path="/resetpassword" element={<ResetPassword />} />
+            <Route
+              exact
+              path="/password/reset/confirm/:uid/:token"
+              element={<ResetPasswordConfirm />}
+            />
+          </Route>
         </Route>
       </Route>
       <Route path="*" element={<PageNotFound />} />

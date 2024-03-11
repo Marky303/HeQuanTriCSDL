@@ -2,7 +2,7 @@
     background-color: rgb(130, 130, 130);
     height: 7dvh;
     display: grid;
-    grid-template-columns: 3.2fr 17fr 3fr;
+    grid-template-columns: 3.2fr 16fr 4fr;
 }
 
 .home-link-cont {
@@ -31,7 +31,7 @@
 
 .auth-view-cont {
     display: grid;
-    grid-template-columns: 2.8fr 1.8fr;
+    grid-template-columns: 3fr 1.4fr;
 }
 
 .welcome-text {
@@ -64,6 +64,8 @@
 }
 
 .login-btn {
+    margin-left: 1.2dvw;
+    margin-right: auto;
     border: none;
     font-size: 1.8dvh;
     height: 4dvh;

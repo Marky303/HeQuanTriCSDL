@@ -1,5 +1,8 @@
-import { createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
+
+// Importing NotifyContext to get notify function
+import NotifyContext from "./NotifyContext";
 
 // Create a new context
 const AuthContext = createContext();
@@ -7,11 +10,20 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = () => {
+  // Get notify function
+  let { notify } = useContext(NotifyContext);
+
   // Get and set authTokens variable if it is saved in localStorage
   // Preventing logging out when reloading page
   let [authTokens, setauthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
+      : null
+  );
+
+  let [userInfo, setuserInfo] = useState(() =>
+    localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
       : null
   );
 
@@ -29,7 +41,7 @@ export const AuthProvider = () => {
     // IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     e.preventDefault();
 
-    // Setting login to true
+    // Setting loading to true
     setFetching((fetching = true));
 
     // Posting to server and get response
@@ -46,19 +58,51 @@ export const AuthProvider = () => {
     });
     let data = await response.json();
 
-    // Setting login to false
+    // Setting loading to false
     setFetching((fetching = false));
 
     if (response.status == 200) {
       setauthTokens(data);
       localStorage.setItem("authTokens", JSON.stringify(data));
       navigate("/dash");
+
+      // Get user information after logging in
+      getUserinfo(true);
     }
     // Notify if login unsuccessful
     else {
-      // TODO better notification
       let detail = JSON.stringify(data);
-      alert(detail);
+      notify("error", detail);
+    }
+  };
+
+  // Get user information
+  let getUserinfo = async (isLogin) => {
+    // Getting user info
+    let response = await fetch("http://localhost:8000/account/getuserinfo/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Something is wrong here
+        Authorization:
+          "Bearer " +
+          String(JSON.parse(localStorage.getItem("authTokens")).access),
+      },
+    });
+    let data = await response.json();
+    // Save user information
+    if (response.status == 200) {
+      setuserInfo(data);
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      // Display welcome back notification
+      if (isLogin) 
+      {
+        let welcomeMsg = "Welcome back, " + data.name;
+        notify("success", welcomeMsg)
+      }
+    } else {
+      // Logout if cannot get user information
+      notify("error", "Something went wrong. Please login again.");
     }
   };
 
@@ -87,24 +131,23 @@ export const AuthProvider = () => {
     setFetching((fetching = false));
 
     if (response.status == 201) {
-      // TODO better signup redirection
-      alert(
-        "User created successfully, please check your email for account activation"
-      );
+      notify("success", "User created successfully, please check your email.");
       navigate("/login");
     }
     // Notify if signup unsuccessful
     else {
-      // TODO better notification
       let detail = JSON.stringify(data);
-      alert(detail);
+      notify("error", detail);
     }
   };
 
   // Creating logout function to pass it to logout button
   let logoutUser = () => {
     setauthTokens(null);
+    setuserInfo(null);
     localStorage.removeItem("authTokens");
+    localStorage.removeItem("userInfo");
+    notify("warning", "Logged out.");
     navigate("/login");
   };
 
@@ -138,11 +181,13 @@ export const AuthProvider = () => {
     if (response.status === 200) {
       // Setting (and decoding) token info for variables
       setauthTokens(data);
+      getUserinfo(false);
       localStorage.setItem("authTokens", JSON.stringify(data));
     }
     // If refresh unsuccessfully
     else {
       logoutUser();
+      notify("error", "Something happened, please log in.");
     }
     if (loading) {
       setLoading(false);
@@ -173,14 +218,16 @@ export const AuthProvider = () => {
     setFetching((fetching = false));
 
     if (response.status == 204) {
-      alert("Password reset email has been sent!");
+      notify("success", "Password reset request has been sent!");
     } else {
-      alert("Cannot find email");
+      notify("error", "Cannot find specified email!");
     }
   };
 
   let resetPassword = async (e) => {
     e.preventDefault();
+
+    setFetching((fetching = true));
 
     let acceptable = true;
 
@@ -210,21 +257,25 @@ export const AuthProvider = () => {
           }),
         }
       );
+
       if (response.status == 204) {
-        alert("Password reset successfully!");
+        notify("success", "Password has been changed.");
         navigate("/login");
       } else {
-        alert("Something went wrong");
+        notify("error", "Cannot change password, please retry!");
       }
     } else {
-      alert("New password criteria isn't met!");
+      notify("warning", "New password criteria isn't met!");
     }
+
+    setFetching((fetching = false));
   };
 
   // Declaring context data to pass to other components
   let contextData = {
     // userauth related variables
     authTokens: authTokens,
+    userInfo: userInfo,
     fetching: fetching,
 
     // userauth related functions
@@ -264,7 +315,6 @@ export const AuthProvider = () => {
   // Nested elements are rendered using <Outlet /> tag (using nested routers)
   return (
     // If loading is true, render nothing, else render everything as normal
-    // TODO add loading ***
     <AuthContext.Provider value={contextData}>
       {<Outlet />}
     </AuthContext.Provider>
