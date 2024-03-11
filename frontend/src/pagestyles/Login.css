@@ -1,10 +1,22 @@
+.userauth-page-wrapper {
+    position: relative;
+}
+
 .login-form-cont {
+    left: 50%;
+    top: 18%;
+    transform: translate(-50%);
+
+    position: absolute;
     background-color: rgb(203, 203, 203);
     width: 30dvw;
     height: 55dvh;
-    border-radius: 2.8dvh;
-    margin: auto;
-    margin-top: 18dvh;
+    border-radius: 2.8dvh
+}
+
+.userauth-bg {
+    width: 100%;
+    height: 92.2dvh;
 }
 
 .login-form-prompt {
