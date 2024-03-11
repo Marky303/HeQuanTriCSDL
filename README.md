@@ -50,3 +50,4 @@ Additional features to be added to this template:
 - ~~Account activation successful alert (what the ~~fuck~~ is wrong with the activation site)~~
 - ~~Simple note example~~ 
 - Reset username
+- Retain filled fields (except password)

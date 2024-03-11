@@ -205,8 +205,9 @@ export const AuthProvider = () => {
     if (response.status === 200) {
       // Setting (and decoding) token info for variables
       setauthTokens(data);
-      getUserinfo(false);
       localStorage.setItem("authTokens", JSON.stringify(data));
+      // getUserInfo is causing the funny here
+      getUserinfo(false);
     }
     // If refresh unsuccessfully
     else {
