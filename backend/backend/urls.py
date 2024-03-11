@@ -8,6 +8,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     
-    # Note model for testing
-    path('notes/', include('account.api.urls'))
+    # Account path
+    path('account/', include('account.api.urls')),
 ]

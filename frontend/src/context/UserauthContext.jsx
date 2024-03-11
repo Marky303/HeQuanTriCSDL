@@ -21,6 +21,12 @@ export const AuthProvider = () => {
       : null
   );
 
+  let [userInfo, setuserInfo] = useState(() =>
+    localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null
+  );
+
   let [fetching, setFetching] = useState(false);
 
   let [loading, setLoading] = useState(true);
@@ -59,13 +65,44 @@ export const AuthProvider = () => {
       setauthTokens(data);
       localStorage.setItem("authTokens", JSON.stringify(data));
       navigate("/dash");
-      // TODO: get username
-      notify("success", "logged in!");
+
+      // Get user information after logging in
+      getUserinfo(true);
     }
     // Notify if login unsuccessful
     else {
       let detail = JSON.stringify(data);
       notify("error", detail);
+    }
+  };
+
+  // Get user information
+  let getUserinfo = async (isLogin) => {
+    // Getting user info
+    let response = await fetch("http://localhost:8000/account/getuserinfo/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Something is wrong here
+        Authorization:
+          "Bearer " +
+          String(JSON.parse(localStorage.getItem("authTokens")).access),
+      },
+    });
+    let data = await response.json();
+    // Save user information
+    if (response.status == 200) {
+      setuserInfo(data);
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      // Display welcome back notification
+      if (isLogin) 
+      {
+        let welcomeMsg = "Welcome back, " + data.name;
+        notify("success", welcomeMsg)
+      }
+    } else {
+      // Logout if cannot get user information
+      notify("error", "Something went wrong. Please login again.");
     }
   };
 
@@ -99,7 +136,6 @@ export const AuthProvider = () => {
     }
     // Notify if signup unsuccessful
     else {
-      // TODO better notification
       let detail = JSON.stringify(data);
       notify("error", detail);
     }
@@ -108,8 +144,10 @@ export const AuthProvider = () => {
   // Creating logout function to pass it to logout button
   let logoutUser = () => {
     setauthTokens(null);
+    setuserInfo(null);
     localStorage.removeItem("authTokens");
-    notify("warning", "Logged out.")
+    localStorage.removeItem("userInfo");
+    notify("warning", "Logged out.");
     navigate("/login");
   };
 
@@ -143,6 +181,7 @@ export const AuthProvider = () => {
     if (response.status === 200) {
       // Setting (and decoding) token info for variables
       setauthTokens(data);
+      getUserinfo(false);
       localStorage.setItem("authTokens", JSON.stringify(data));
     }
     // If refresh unsuccessfully
@@ -220,13 +259,13 @@ export const AuthProvider = () => {
       );
 
       if (response.status == 204) {
-        notify("success", "Password has been changed.")
+        notify("success", "Password has been changed.");
         navigate("/login");
       } else {
-        notify("error", "Cannot change password, please retry!")
+        notify("error", "Cannot change password, please retry!");
       }
     } else {
-      notify("warning", "New password criteria isn't met!")
+      notify("warning", "New password criteria isn't met!");
     }
 
     setFetching((fetching = false));
@@ -236,6 +275,7 @@ export const AuthProvider = () => {
   let contextData = {
     // userauth related variables
     authTokens: authTokens,
+    userInfo: userInfo,
     fetching: fetching,
 
     // userauth related functions
@@ -275,7 +315,6 @@ export const AuthProvider = () => {
   // Nested elements are rendered using <Outlet /> tag (using nested routers)
   return (
     // If loading is true, render nothing, else render everything as normal
-    // TODO add loading ***
     <AuthContext.Provider value={contextData}>
       {<Outlet />}
     </AuthContext.Provider>

@@ -19,6 +19,9 @@ const Navbar = () => {
   // Implement if authorized
   let { authTokens } = useContext(AuthContext);
 
+  // Getting user information
+  let { userInfo } = useContext(AuthContext);
+
   // Get logout function
   let { logoutUser } = useContext(AuthContext);
 
@@ -45,7 +48,7 @@ const Navbar = () => {
       <div className="userauth-wrapper">
         {authTokens ? (
           <div className="auth-view-cont">
-            <p className="welcome-text"> Hello user! </p>
+            <p className="welcome-text"> Hello {userInfo.name}! </p>
             <button className="logout-btn" onClick={logoutUser}>
               Logout
             </button>
