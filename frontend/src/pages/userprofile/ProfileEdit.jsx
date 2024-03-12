@@ -22,22 +22,130 @@ const ProfileEdit = () => {
         <hr className="profileedit-form-line"></hr>
         <form className="profileedit-form" onSubmit={console.log("submitted")}>
           <fieldset className="form-disabled">
-            <p className="form-spec">Email</p>
-            <input
-              className="form-input"
-              type="text"
-              name="email"
-              placeholder="Enter your email"
-            />
-            <p className="form-spec">Password</p>
-            <input
-              className="form-input"
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-            />
+            <div className="profileedit-fields-twocolumn">
+              <div className="form-spec-wrapper">
+                <p className="form-spec">Email</p>
+                <input
+                  className="profileedit-form-input"
+                  type="text"
+                  name="email"
+                  placeholder="Edit your email"
+                />
+              </div>
+              <div className="form-spec-wrapper">
+                <p className="form-spec">Name</p>
+                <input
+                  className="profileedit-form-input"
+                  type="text"
+                  name="name"
+                  placeholder="Edit your name"
+                />
+              </div>
+              <div className="form-spec-wrapper">
+                <p className="form-spec">Profession</p>
+                <input
+                  className="profileedit-form-input"
+                  type="text"
+                  name="email"
+                  placeholder="Edit your profession"
+                />
+              </div>
+              <div className="form-spec-wrapper">
+                <p className="form-spec">Location</p>
+                <input
+                  className="profileedit-form-input"
+                  type="text"
+                  name="email"
+                  placeholder="Edit your location"
+                />
+              </div>
+            </div>
+            <div className="form-spec-wrapper">
+              <p className="form-spec">Short description</p>
+              <input
+                className="profileedit-form-input-desc"
+                type="text"
+                name="email"
+                placeholder="Edit your description"
+              />
+            </div>
+            <div className="userskill-cont">
+              <p className="form-spec">Skills</p>
+              <div className="userskill-list-cont">
+
+                <div className="userskill-content">
+                  <p className="userskill-text">Skill 1</p>
+                  <button className="userskill-delete-btn">x</button>
+                </div>
+
+                <div className="userskill-content">
+                  <p className="userskill-text">A very long skill description</p>
+                  <button className="userskill-delete-btn">x</button>
+                </div>
+
+                <div className="userskill-content">
+                  <p className="userskill-text">Skill 3</p>
+                  <button className="userskill-delete-btn">x</button>
+                </div>
+
+                <div className="userskill-content">
+                  <p className="userskill-text">Skill 3</p>
+                  <button className="userskill-delete-btn">x</button>
+                </div>
+
+                <div className="userskill-content">
+                  <p className="userskill-text">Another long skill description</p>
+                  <button className="userskill-delete-btn">x</button>
+                </div>
+
+                <div className="userskill-content">
+                  <p className="userskill-text">Skill 3</p>
+                  <button className="userskill-delete-btn">x</button>
+                </div>
+
+                
+                
+              </div>
+            </div>
+            <div className="usercontact-cont">
+              <p className="form-spec">Contacts</p>
+              <div className="usercontact-list-cont">
+
+                <div className="usercontact-content">
+                  <p className="usercontact-text">Contact 1</p>
+                  <p className="vl"></p>
+                  <p className="usercontact-text">069 6969696969</p>
+                  <button className="usercontact-delete-btn">x</button>
+                </div>
+
+                <div className="usercontact-content">
+                <p className="usercontact-text">Email</p>
+                  <p className="vl"></p>
+                  <p className="usercontact-text">saygex@sexgay.com</p>
+                  <button className="usercontact-delete-btn">x</button>
+                </div>
+
+                <div className="usercontact-content">
+                <p className="usercontact-text">Skill 1</p>
+                  <p className="vl"></p>
+                  <p className="usercontact-text">Skill 1</p>
+                  <button className="usercontact-delete-btn">x</button>
+                </div>
+
+                <div className="usercontact-content">
+                <p className="usercontact-text">Skill 1</p>
+                  <p className="vl"></p>
+                  <p className="usercontact-text">Skill 1</p>
+                  <button className="usercontact-delete-btn">x</button>
+                </div>
+
+              
+                
+                
+              </div>
+            </div>
             <button className="profileedit-submit-btn" type="submit">
-              profileedit
+              Save
             </button>
           </fieldset>
         </form>
