@@ -15,7 +15,7 @@ class UserCreateSerializer(UserCreateSerializer):
         model = User
         fields = ('id', 'email', 'name', 'password') 
 
-# Additional userinfo serializers
+# Additional userinfo serializers (not needed for the time being)
 class ContactSerializer(ModelSerializer):
     class Meta: 
         model = Contact

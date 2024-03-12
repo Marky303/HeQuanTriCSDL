@@ -296,6 +296,37 @@ export const AuthProvider = () => {
     setFetching((fetching = false));
   };
 
+  let updateUserInfo = async (e) => {
+    // Sending update request
+    let response = await fetch(
+      "http://localhost:8000/account/updateuserinfo/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Something is wrong here
+          Authorization:
+            "Bearer " +
+            String(JSON.parse(localStorage.getItem("authTokens")).access),
+        },
+        body: JSON.stringify({
+          email: e.target.email.value,
+          name: e.target.name.value,
+          currentJob: e.target.currentJob.value,
+          currentLocation: e.target.currentLocation.value,
+          shortDesc: e.target.shortDesc.value,
+        }),
+      }
+    );
+    let data = await response.json();
+    let message = data.detail;
+    let notifType = response.status == 202 ? "success" : "error";
+    if (response.status == 202)
+      // Get new user info on successful response/edit
+      getUserinfo(false);
+    notify(notifType, message);
+  };
+
   // Declaring context data to pass to other components
   let contextData = {
     // userauth related variables
@@ -311,6 +342,7 @@ export const AuthProvider = () => {
     updateToken: updateToken,
     sendResetRequest: sendResetRequest,
     resetPassword: resetPassword,
+    updateUserInfo: updateUserInfo,
   };
 
   useEffect(() => {

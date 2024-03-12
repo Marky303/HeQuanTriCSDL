@@ -16,13 +16,16 @@ import NotifyContext from "../../context/NotifyContext";
 const ProfileEdit = () => {
   // Get notify function
   let { notify } = useContext(NotifyContext);
-  
+
   // Getting user/userauth info
   let { authTokens } = useContext(AuthContext);
   let { userInfo } = useContext(AuthContext);
 
+  // Get update function
+  let { updateUserInfo } = useContext(AuthContext);
+
+  // Updating text fields
   useEffect(() => {
-    // Updating text fields
     let element;
     const textFieldList = [
       "email",
@@ -41,8 +44,16 @@ const ProfileEdit = () => {
   let copyContact = (e, text) => {
     e.preventDefault();
     navigator.clipboard.writeText(text);
-    notify("info","Copied contact!")
-  }
+    notify("info", "Copied contact!");
+  };
+
+  // Form submit handler/wrapper
+  let handleSubmit = (e) => {
+    // Delete this TEST line
+    e.preventDefault();
+    // Call update user info function
+    updateUserInfo(e);
+  };
 
   // Private route implemented
   return authTokens ? (
@@ -51,7 +62,7 @@ const ProfileEdit = () => {
       <div className="profileedit-form-cont">
         <p className="profileedit-form-prompt">User settings</p>
         <hr className="profileedit-form-line"></hr>
-        <form className="profileedit-form">
+        <form className="profileedit-form" onSubmit={(e) => handleSubmit(e)}>
           <fieldset className="form-disabled">
             <div className="profileedit-fields-twocolumn">
               <div className="form-spec-wrapper">
@@ -116,15 +127,23 @@ const ProfileEdit = () => {
               <p className="form-spec">Contacts</p>
               <div className="usercontact-list-cont">
                 {userInfo.contacts.map((contact) => {
-                const contactSplitted = contact.split(":");
-                return (
-                  <div className="usercontact-content">
-                    <p className="usercontact-text">{contactSplitted[0]}</p>
-                    <p className="vl"></p>
-                    <button className="usercontact-text-btn" onClick={(e)=>{copyContact(e, contactSplitted[1])}}>{contactSplitted[1]}</button>
-                    <button className="usercontact-delete-btn">x</button>
-                  </div>
-                )})}
+                  const contactSplitted = contact.split(":");
+                  return (
+                    <div className="usercontact-content">
+                      <p className="usercontact-text">{contactSplitted[0]}</p>
+                      <p className="vl"></p>
+                      <button
+                        className="usercontact-text-btn"
+                        onClick={(e) => {
+                          copyContact(e, contactSplitted[1]);
+                        }}
+                      >
+                        {contactSplitted[1]}
+                      </button>
+                      <button className="usercontact-delete-btn">x</button>
+                    </div>
+                  );
+                })}
                 <button className="add-skillcontact-btn">+</button>
               </div>
             </div>

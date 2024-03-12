@@ -8,4 +8,5 @@ urlpatterns = [
     # Note example url
     path('getnotes/', views.getNotes),
     path('getuserinfo/', views.getUserinfo),
+    path('updateuserinfo/', views.updateUserinfo),
 ]
