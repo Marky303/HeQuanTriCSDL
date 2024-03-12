@@ -1,0 +1,110 @@
+.profileedit-page-wrapper {
+    position: relative;
+}
+
+.profileedit-form-cont {
+    left: 50%;
+    top: 7%;
+    transform: translate(-50%);
+
+    position: absolute;
+    background-color: rgb(203, 203, 203);
+    width: 70dvw;
+    height: 80dvh;
+    border-radius: 2.8dvh
+}
+
+.profileedit-bg {
+    width: 100%;
+    height: 92.2dvh;
+}
+
+.profileedit-form-prompt {
+    padding-top: 3dvh;
+    padding-bottom: 3dvh;
+    margin: 0px;
+    height: 6dvh;
+    font-weight: 900;
+    font-size: 5.2dvh;
+    text-align: center;
+}
+
+.profileedit-form-line {
+    height: 0.1dvh;
+    margin-top: 0dvh;
+    margin-bottom: 3dvh;
+}
+
+.form-disabled {
+    display: grid;
+    border: none;
+}
+
+.profileedit-form {
+    display: grid;
+}
+
+.form-spec {
+    font-size: 2.5dvh;
+    padding-left: 2dvw;
+    margin: 0px;
+    margin-bottom: 2.1dvh;
+}
+
+.form-input {
+    font-size: 2dvh;
+    height: 3.7dvh;
+    width: 21dvw;
+    border-radius: 3.5dvh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2dvh;
+    padding-left: 1dvw;
+    border: none;
+    transition: opacity 0.15s;
+}
+
+.form-input:hover {
+    opacity: 0.65;
+}
+
+.profileedit-submit-btn {
+    font-size: 2dvh;
+    height: 4dvh;
+    width: 16dvw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3dvh;
+    border-radius: 4dvh;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.profileedit-submit-btn:hover {
+    opacity: 0.8;
+    border: solid;
+    border-width: 0.1dvh;
+}
+
+.profileedit-submit-btn:active {
+    opacity: 0.2;
+}
+
+.profileedit-redirect-cont {
+    display: grid;
+    grid-template-columns: 1fr 0.2fr 1fr;
+}
+
+.or-redirect-text {
+    font-size: 2.3dvh;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 3.8dvh;
+}
+
+.profileedit-redirect {
+    font-size: 2.3dvh;
+    text-align: center;
+    margin-top: 3.8dvh;
+}

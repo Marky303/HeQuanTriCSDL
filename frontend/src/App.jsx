@@ -16,6 +16,9 @@ import Products from "./pages/home/Products";
 // Importing main page (private route)
 import Home from "./pages/Home";
 
+// Importing profile related pages
+import ProfileEdit from "./pages/userprofile/ProfileEdit";
+
 // Importing userath related pages
 import Login from "./pages/userauth/Login";
 import Signup from "./pages/userauth/Signup";
@@ -37,6 +40,8 @@ const App = () => (
         <Route exact path="/" element={<AuthProvider />}>
           <Route path="/" element={<Layout />}>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/profileedit" element={<ProfileEdit />} />
+
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/activate/:uid/:token" element={<Activate />} />
@@ -46,6 +51,7 @@ const App = () => (
               path="/password/reset/confirm/:uid/:token"
               element={<ResetPasswordConfirm />}
             />
+
             <Route exact path="/home" element={<Opening />} />
             <Route exact path="/contacts" element={<Contacts />} />
             <Route exact path="/learn" element={<Learn />} />
