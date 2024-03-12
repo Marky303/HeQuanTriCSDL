@@ -20,18 +20,19 @@ class UserAccountManager(BaseUserManager):
         # Finally save the user
         user.save()
         return user
-    
-    # Incase you need that
-    def create_superuser(self):
-        pass
 
 # Custom user model goes here.
 class UserAccount(AbstractBaseUser, PermissionsMixin):
-    # Add user profile imformation/ fields here
+    # Necessary user fields
     email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    
+    # Other user fields (other information)
+    currentJob = models.CharField(max_length=50, default="Unemployed")
+    currentLocation = models.CharField(max_length=120, default="Nowhere")
+    shortDesc = models.CharField(max_length=100, default="Relatively hard-working and normal human being")
     
     # Email will be used as username field for now
     USERNAME_FIELD = 'email'
@@ -50,9 +51,42 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self):
         return self.name
+
+# User skills
+class Skill(models.Model):
+    # Foreign key to user
+    skillOwner = models.ForeignKey(UserAccount, on_delete=models.CASCADE, null=True)
     
-# Importing usermodel to foreignkey to
-from account.models import UserAccount     
+    # Skill content
+    skillContent = models.TextField(max_length=20)
+    
+    # Django admin test
+    def __str__(self):
+        return self.skillOwner.name + self.skillContent
+
+# User contacts
+class Contact(models.Model):
+    # Foreign key to user
+    contactOwner = models.ForeignKey(UserAccount, on_delete=models.CASCADE, null=True)
+    
+    # Contact info
+    contacType = models.TextField(max_length=20)
+    contactContent = models.TextField(max_length=120)
+    
+    # Django admin test
+    def __str__(self):
+        return self.contactOwner.name + self.contactType
+
+
+
+
+
+
+
+
+
+
+
 
 # Note model for post testing
 class Note(models.Model):
