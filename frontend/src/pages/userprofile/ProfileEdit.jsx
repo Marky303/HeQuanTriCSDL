@@ -17,12 +17,21 @@ const ProfileEdit = () => {
   useEffect(() => {
     // Updating text fields
     let element;
-    const textFieldList = ["email", "name", "currentJob", "currentLocation", "shortDesc"];
+    const textFieldList = [
+      "email",
+      "name",
+      "currentJob",
+      "currentLocation",
+      "shortDesc",
+    ];
     for (let i of textFieldList) {
-      element = document.getElementsByName(i)[0]
-      element.setAttribute("value", userInfo[i])
+      element = document.getElementsByName(i)[0];
+      element.setAttribute("value", userInfo[i]);
     }
-  }, [])
+
+    // Test
+    console.log(userInfo.skills);
+  }, []);
 
   // Private route implemented
   return authTokens ? (
@@ -83,76 +92,29 @@ const ProfileEdit = () => {
             <div className="userskill-cont">
               <p className="form-spec">Skills</p>
               <div className="userskill-list-cont">
-
-                <div className="userskill-content">
-                  <p className="userskill-text">Skill 1</p>
-                  <button className="userskill-delete-btn">x</button>
-                </div>
-
-                <div className="userskill-content">
-                  <p className="userskill-text">A very long skill description</p>
-                  <button className="userskill-delete-btn">x</button>
-                </div>
-
-                <div className="userskill-content">
-                  <p className="userskill-text">Skill 3</p>
-                  <button className="userskill-delete-btn">x</button>
-                </div>
-
-                <div className="userskill-content">
-                  <p className="userskill-text">Skill 3</p>
-                  <button className="userskill-delete-btn">x</button>
-                </div>
-
-                <div className="userskill-content">
-                  <p className="userskill-text">Another long skill description</p>
-                  <button className="userskill-delete-btn">x</button>
-                </div>
-
-                <div className="userskill-content">
-                  <p className="userskill-text">Skill 3</p>
-                  <button className="userskill-delete-btn">x</button>
-                </div>
-
-                
-                
+                {userInfo.skills.map((skill) => (
+                  <div className="userskill-content">
+                    <p className="userskill-text">{skill}</p>
+                    <button className="userskill-delete-btn">x</button>
+                  </div>
+                ))}
+                <button className="add-skillcontact-btn">+</button>
               </div>
             </div>
             <div className="usercontact-cont">
               <p className="form-spec">Contacts</p>
               <div className="usercontact-list-cont">
-
-                <div className="usercontact-content">
-                  <p className="usercontact-text">Contact 1</p>
-                  <p className="vl"></p>
-                  <p className="usercontact-text">069 6969696969</p>
-                  <button className="usercontact-delete-btn">x</button>
-                </div>
-
-                <div className="usercontact-content">
-                <p className="usercontact-text">Email</p>
-                  <p className="vl"></p>
-                  <p className="usercontact-text">saygex@sexgay.com</p>
-                  <button className="usercontact-delete-btn">x</button>
-                </div>
-
-                <div className="usercontact-content">
-                <p className="usercontact-text">Skill 1</p>
-                  <p className="vl"></p>
-                  <p className="usercontact-text">Skill 1</p>
-                  <button className="usercontact-delete-btn">x</button>
-                </div>
-
-                <div className="usercontact-content">
-                <p className="usercontact-text">Skill 1</p>
-                  <p className="vl"></p>
-                  <p className="usercontact-text">Skill 1</p>
-                  <button className="usercontact-delete-btn">x</button>
-                </div>
-
-              
-                
-                
+                {userInfo.contacts.map((contact) => {
+                const contactSplitted = contact.split(":");
+                return (
+                  <div className="usercontact-content">
+                    <p className="usercontact-text">{contactSplitted[0]}</p>
+                    <p className="vl"></p>
+                    <p className="usercontact-text">{contactSplitted[1]}</p>
+                    <button className="usercontact-delete-btn">x</button>
+                  </div>
+                )})}
+                <button className="add-skillcontact-btn">+</button>
               </div>
             </div>
             <button className="profileedit-submit-btn" type="submit">

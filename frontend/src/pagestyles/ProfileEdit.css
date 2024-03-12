@@ -99,6 +99,25 @@
     width: 52dvw;
 }
 
+.add-skillcontact-btn {
+    height: 3.7dvh;
+    width: 3.7dvh;
+    margin: 0.4dvh;
+    border-radius: 1.85dvh;
+    border: none;
+    transition: opacity 0.15s;
+}
+
+.add-skillcontact-btn:hover {
+    opacity: 0.8;
+    border: solid;
+    border-width: 0.1dvh;
+}
+
+.add-skillcontact-btn:active {
+    opacity: 0.2;
+}
+
 .userskill-content {
     display: grid;
     display: flex;
@@ -140,7 +159,6 @@
     padding-left: 0.5dvw;
     padding-right: 0.5dvw;
 }
-
 
 .usercontact-list-cont {
     margin-left: 3.1dvw;

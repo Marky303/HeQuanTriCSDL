@@ -62,7 +62,7 @@ class Skill(models.Model):
     
     # Django admin test
     def __str__(self):
-        return self.skillOwner.name + self.skillContent
+        return self.skillContent
 
 # User contacts
 class Contact(models.Model):
@@ -75,7 +75,7 @@ class Contact(models.Model):
     
     # Django admin test
     def __str__(self):
-        return self.UserAccount.name +" with the contact: " +self.contactType
+        return self.contactType + ":" + self.contactContent
 
 
 
