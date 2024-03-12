@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 // Importing style
@@ -12,6 +12,17 @@ import AuthContext from "../../context/UserauthContext";
 
 const ProfileEdit = () => {
   let { authTokens } = useContext(AuthContext);
+  let { userInfo } = useContext(AuthContext);
+
+  useEffect(() => {
+    // Updating text fields
+    let element;
+    const textFieldList = ["email", "name", "currentJob", "currentLocation", "shortDesc"];
+    for (let i of textFieldList) {
+      element = document.getElementsByName(i)[0]
+      element.setAttribute("value", userInfo[i])
+    }
+  }, [])
 
   // Private route implemented
   return authTokens ? (
@@ -20,7 +31,7 @@ const ProfileEdit = () => {
       <div className="profileedit-form-cont">
         <p className="profileedit-form-prompt">User settings</p>
         <hr className="profileedit-form-line"></hr>
-        <form className="profileedit-form" onSubmit={console.log("submitted")}>
+        <form className="profileedit-form">
           <fieldset className="form-disabled">
             <div className="profileedit-fields-twocolumn">
               <div className="form-spec-wrapper">
@@ -46,7 +57,7 @@ const ProfileEdit = () => {
                 <input
                   className="profileedit-form-input"
                   type="text"
-                  name="email"
+                  name="currentJob"
                   placeholder="Edit your profession"
                 />
               </div>
@@ -55,7 +66,7 @@ const ProfileEdit = () => {
                 <input
                   className="profileedit-form-input"
                   type="text"
-                  name="email"
+                  name="currentLocation"
                   placeholder="Edit your location"
                 />
               </div>
@@ -65,7 +76,7 @@ const ProfileEdit = () => {
               <input
                 className="profileedit-form-input-desc"
                 type="text"
-                name="email"
+                name="shortDesc"
                 placeholder="Edit your description"
               />
             </div>
