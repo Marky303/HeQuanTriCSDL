@@ -202,6 +202,19 @@
     background-color: rgb(133, 133, 133);
 }
 
+.usercontact-text-btn {
+    background-color: white;
+    border: none;
+    text-align: center;
+    font-size: 1.7dvh;
+    margin: 0px;
+    margin-top: 0.3dvh;
+    padding-left: 0.5dvw;
+    padding-right: 0.5dvw;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
 .usercontact-text {
     text-align: center;
     font-size: 2dvh;

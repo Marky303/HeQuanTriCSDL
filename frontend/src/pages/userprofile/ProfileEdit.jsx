@@ -10,7 +10,14 @@ import background from "../../assets/userauthbg.webp";
 // Importing AuthContext (profileedit function) for profileedit page
 import AuthContext from "../../context/UserauthContext";
 
+// Importing NotifyContext to get notify function
+import NotifyContext from "../../context/NotifyContext";
+
 const ProfileEdit = () => {
+  // Get notify function
+  let { notify } = useContext(NotifyContext);
+  
+  // Getting user/userauth info
   let { authTokens } = useContext(AuthContext);
   let { userInfo } = useContext(AuthContext);
 
@@ -28,10 +35,14 @@ const ProfileEdit = () => {
       element = document.getElementsByName(i)[0];
       element.setAttribute("value", userInfo[i]);
     }
-
-    // Test
-    console.log(userInfo.skills);
   }, []);
+
+  // Copy contact content
+  let copyContact = (e, text) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(text);
+    notify("info","Copied contact!")
+  }
 
   // Private route implemented
   return authTokens ? (
@@ -110,7 +121,7 @@ const ProfileEdit = () => {
                   <div className="usercontact-content">
                     <p className="usercontact-text">{contactSplitted[0]}</p>
                     <p className="vl"></p>
-                    <p className="usercontact-text">{contactSplitted[1]}</p>
+                    <button className="usercontact-text-btn" onClick={(e)=>{copyContact(e, contactSplitted[1])}}>{contactSplitted[1]}</button>
                     <button className="usercontact-delete-btn">x</button>
                   </div>
                 )})}
