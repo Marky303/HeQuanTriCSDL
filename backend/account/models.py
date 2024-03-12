@@ -70,7 +70,7 @@ class Contact(models.Model):
     contactOwner = models.ForeignKey(UserAccount, on_delete=models.CASCADE, null=True)
     
     # Contact info
-    contacType = models.TextField(max_length=20)
+    contactType = models.TextField(max_length=20)
     contactContent = models.TextField(max_length=120)
     
     # Django admin test
