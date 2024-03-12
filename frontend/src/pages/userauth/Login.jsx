@@ -14,13 +14,21 @@ const Login = () => {
   // Implement if authorized
   let { authTokens } = useContext(AuthContext);
 
-  // get function
+  // Get function
   let { loginUser } = useContext(AuthContext);
 
-  // get fetching
+  // Get fetching
   let { fetching } = useContext(AuthContext);
-
-  useEffect(() => {}, [fetching]);
+  useEffect(() => {
+    let element = document.getElementsByClassName("form-disabled");
+    if (fetching) element[0].setAttribute("disabled", "disabled");
+    else element[0].removeAttribute("disabled");
+  }, [fetching]);
+  // Retain fields on failed request
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    loginUser(e);
+  };
 
   // Calling loginUser function upon submitting form
   return authTokens ? (
@@ -28,46 +36,11 @@ const Login = () => {
   ) : (
     <div className="userauth-page-wrapper">
       <img className="userauth-bg" src={background}></img>
-      {fetching ? (
-        <div className="login-form-cont">
-          <p className="login-form-prompt">Login</p>
-          <hr className="login-form-line"></hr>
-          <form className="login-form" onSubmit={loginUser}>
-            <fieldset className="form-disabled" disabled="disabled">
-              <p className="form-spec">Email</p>
-              <input
-                className="form-input"
-                type="text"
-                name="email"
-                placeholder="Enter your email"
-              />
-              <p className="form-spec">Password</p>
-              <input
-                className="form-input"
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-              />
-              <button className="login-submit-btn" type="submit">
-                Login
-              </button>
-              <div className="login-redirect-cont">
-                <Link to="/signup" className="login-redirect">
-                  Sign up
-                </Link>
-                <span className="or-redirect-text">|</span>
-                <Link to="/resetpassword" className="login-redirect">
-                  Reset password
-                </Link>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      ) : (
-        <div className="login-form-cont">
-          <p className="login-form-prompt">Login</p>
-          <hr className="login-form-line"></hr>
-          <form className="login-form" onSubmit={loginUser}>
+      <div className="login-form-cont">
+        <p className="login-form-prompt">Login</p>
+        <hr className="login-form-line"></hr>
+        <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+          <fieldset className="form-disabled">
             <p className="form-spec">Email</p>
             <input
               className="form-input"
@@ -94,9 +67,9 @@ const Login = () => {
                 Reset password
               </Link>
             </div>
-          </form>
-        </div>
-      )}
+          </fieldset>
+        </form>
+      </div>
     </div>
   );
 };
