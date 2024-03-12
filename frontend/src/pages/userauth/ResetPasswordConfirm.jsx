@@ -20,8 +20,18 @@ const ResetPasswordConfirm = () => {
   // Get function from Context
   let { resetPassword } = useContext(AuthContext);
 
-  // get fetching
+  // Get fetching
   let { fetching } = useContext(AuthContext);
+  useEffect(() => {
+    let element = document.getElementsByClassName("form-disabled");
+    if (fetching) element[0].setAttribute("disabled", "disabled");
+    else element[0].removeAttribute("disabled");
+  }, [fetching]);
+  // Retain fields on failed request
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    resetPassword(e);
+  };
 
   useEffect(() => {}, [fetching]);
 
@@ -30,14 +40,13 @@ const ResetPasswordConfirm = () => {
   ) : (
     <div className="userauth-page-wrapper">
       <img className="userauth-bg" src={background}></img>
-      {fetching ? (
         <div className="resetpasswordconfirm-form-cont">
           <p className="resetpasswordconfirm-form-prompt">
             Reset your password
           </p>
           <hr className="resetpasswordconfirm-form-line"></hr>
-          <form className="resetpasswordconfirm-form" onSubmit={resetPassword}>
-            <fieldset className="form-disabled" disabled="disabled">
+          <form className="resetpasswordconfirm-form" onSubmit={(e) => handleSubmit(e)}>
+            <fieldset className="form-disabled">
               <p className="form-spec">Password</p>
               <input
                 className="form-input"
@@ -60,35 +69,6 @@ const ResetPasswordConfirm = () => {
             </fieldset>
           </form>
         </div>
-      ) : (
-        <div className="resetpasswordconfirm-form-cont">
-          <p className="resetpasswordconfirm-form-prompt">
-            Reset your password
-          </p>
-          <hr className="resetpasswordconfirm-form-line"></hr>
-          <form className="resetpasswordconfirm-form" onSubmit={resetPassword}>
-            <p className="form-spec">Password</p>
-            <input
-              className="form-input"
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-            />
-            <p className="form-spec">Password confirmation</p>
-            <input
-              className="form-input"
-              type="password"
-              name="repassword"
-              placeholder="Re-enter your password"
-            />
-            <input type="hidden" name="uid" value={uid} />
-            <input type="hidden" name="token" value={token} />
-            <button className="resetpasswordconfirm-submit-btn" type="submit">
-              Accept
-            </button>
-          </form>
-        </div>
-      )}
     </div>
   );
 };

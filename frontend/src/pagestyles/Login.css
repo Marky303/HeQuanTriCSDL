@@ -37,6 +37,7 @@
 
 .form-disabled {
     display: grid;
+    border: none;
 }
 
 .login-form {
