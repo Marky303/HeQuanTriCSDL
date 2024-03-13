@@ -21,6 +21,14 @@ const ProfileEdit = () => {
   let { authTokens } = useContext(AuthContext);
   let { userInfo } = useContext(AuthContext);
 
+  // Get fetching
+  let { fetching } = useContext(AuthContext);
+  useEffect(() => {
+    let element = document.getElementsByClassName("form-disabled");
+    if (fetching) element[0].setAttribute("disabled", "disabled");
+    else element[0].removeAttribute("disabled");
+  }, [fetching]);
+
   // Get update function
   let { updateUserInfo } = useContext(AuthContext);
 

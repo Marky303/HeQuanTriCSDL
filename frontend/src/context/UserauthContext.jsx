@@ -297,6 +297,9 @@ export const AuthProvider = () => {
   };
 
   let updateUserInfo = async (e) => {
+    // Set fetching to true
+    setFetching((fetching = true));
+
     // Sending update request
     let response = await fetch(
       "http://localhost:8000/account/updateuserinfo/",
@@ -319,6 +322,10 @@ export const AuthProvider = () => {
       }
     );
     let data = await response.json();
+
+    // Set fetching to false
+    setFetching((fetching = false));
+
     let message = data.detail;
     let notifType = response.status == 202 ? "success" : "error";
     if (response.status == 202)
