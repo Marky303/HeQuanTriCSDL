@@ -26,7 +26,7 @@ const Home = () => {
     setNotes(data);
   };
 
-  // Private route implemented TODO
+  // Private route implemented
   return authTokens ? (
     <div className="home-page-cont">
       <p> This is the home page </p>

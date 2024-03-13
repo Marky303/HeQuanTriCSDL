@@ -296,6 +296,145 @@ export const AuthProvider = () => {
     setFetching((fetching = false));
   };
 
+  let updateUserInfo = async (e) => {
+    // Set fetching to true
+    setFetching((fetching = true));
+
+    // Sending update request
+    let response = await fetch(
+      "http://localhost:8000/account/updateuserinfo/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Something is wrong here
+          Authorization:
+            "Bearer " +
+            String(JSON.parse(localStorage.getItem("authTokens")).access),
+        },
+        body: JSON.stringify({
+          email: e.target.email.value,
+          name: e.target.name.value,
+          currentJob: e.target.currentJob.value,
+          currentLocation: e.target.currentLocation.value,
+          shortDesc: e.target.shortDesc.value,
+        }),
+      }
+    );
+    let data = await response.json();
+
+    // Set fetching to false
+    setFetching((fetching = false));
+
+    let message = data.detail;
+    let notifType = response.status == 202 ? "success" : "error";
+    if (response.status == 202)
+      // Get new user info on successful response/edit
+      getUserinfo(false);
+    notify(notifType, message);
+  };
+
+  let addUserskill = async (skill) => {
+    // Set fetching to true
+    setFetching((fetching = true));
+
+    // Sending adding skill request
+    let response = await fetch("http://localhost:8000/account/adduserskill/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Something is wrong here
+        Authorization:
+          "Bearer " +
+          String(JSON.parse(localStorage.getItem("authTokens")).access),
+      },
+      body: JSON.stringify({
+        skill: skill,
+      }),
+    });
+    let data = await response.json();
+
+    // Set fetching to false
+    setFetching((fetching = false));
+
+    let message = data.detail;
+    let notifType = response.status == 202 ? "success" : "error";
+    if (response.status == 202)
+      // Get new user info on successful response/edit
+      getUserinfo(false);
+    notify(notifType, message);
+  };
+
+  let deleteUsertag = async (id, type) => {
+    // Set fetching to true
+    setFetching((fetching = true));
+
+    // Change the link accordingly
+    let link = "http://localhost:8000/account/deleteuser" + type;
+    console.log(link)
+
+    // Sending adding skill request
+    let response = await fetch(link, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Something is wrong here
+        Authorization:
+          "Bearer " +
+          String(JSON.parse(localStorage.getItem("authTokens")).access),
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    });
+    let data = await response.json();
+
+    // Set fetching to false
+    setFetching((fetching = false));
+
+    let message = data.detail;
+    let notifType = response.status == 202 ? "success" : "error";
+    if (response.status == 202)
+      // Get new user info on successful response/edit
+      getUserinfo(false);
+    notify(notifType, message);
+  };
+
+  let addUsercontact = async (contactType, contactContent) => {
+    // Set fetching to true
+    setFetching((fetching = true));
+
+    // Sending adding skill request
+    let response = await fetch(
+      "http://localhost:8000/account/addusercontact/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Something is wrong here
+          Authorization:
+            "Bearer " +
+            String(JSON.parse(localStorage.getItem("authTokens")).access),
+        },
+        body: JSON.stringify({
+          contactType: contactType,
+          contactContent: contactContent,
+        }),
+      }
+    );
+    let data = await response.json();
+
+    // Set fetching to false
+    setFetching((fetching = false));
+
+    let message = data.detail;
+    let notifType = response.status == 202 ? "success" : "error";
+    if (response.status == 202)
+      // Get new user info on successful response/edit
+      getUserinfo(false);
+    notify(notifType, message);
+  };
+
   // Declaring context data to pass to other components
   let contextData = {
     // userauth related variables
@@ -311,6 +450,10 @@ export const AuthProvider = () => {
     updateToken: updateToken,
     sendResetRequest: sendResetRequest,
     resetPassword: resetPassword,
+    updateUserInfo: updateUserInfo,
+    addUserskill: addUserskill,
+    addUsercontact: addUsercontact,
+    deleteUsertag: deleteUsertag,
   };
 
   useEffect(() => {

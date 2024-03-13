@@ -55,27 +55,27 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 # User skills
 class Skill(models.Model):
     # Foreign key to user
-    skillOwner = models.ForeignKey(UserAccount, on_delete=models.CASCADE, null=True)
+    UserAccount = models.ForeignKey(UserAccount, related_name='skills', on_delete=models.CASCADE, null=True)
     
     # Skill content
     skillContent = models.TextField(max_length=20)
     
     # Django admin test
     def __str__(self):
-        return self.skillOwner.name + self.skillContent
+        return str(self.id) + ":" + self.skillContent
 
 # User contacts
 class Contact(models.Model):
     # Foreign key to user
-    contactOwner = models.ForeignKey(UserAccount, on_delete=models.CASCADE, null=True)
+    UserAccount = models.ForeignKey(UserAccount, related_name='contacts',  on_delete=models.CASCADE, null=True)
     
     # Contact info
-    contacType = models.TextField(max_length=20)
+    contactType = models.TextField(max_length=20)
     contactContent = models.TextField(max_length=120)
     
     # Django admin test
     def __str__(self):
-        return self.contactOwner.name + self.contactType
+        return str(self.id) + ":" + self.contactType + ":" + self.contactContent
 
 
 
