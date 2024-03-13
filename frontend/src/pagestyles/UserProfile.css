@@ -1,0 +1,167 @@
+.viewprofile-page-wrapper {
+  position: relative;
+}
+
+.viewprofile-form-cont {
+  left: 50%;
+  top: 7%;
+  transform: translate(-50%);
+
+  position: absolute;
+  background-color: rgb(203, 203, 203);
+  width: 55dvw;
+  height: auto;
+  border-radius: 2.8dvh;
+}
+
+.viewprofile-otherinfo-introduction-prompt {
+    font-size: 3dvh;
+    font-weight: 600;
+    margin: 0;
+    margin-left: 2.4dvw;
+    margin-top: 2.3dvh;
+}
+
+.viewprofile-otherinfo-introduction-content{
+    font-size: 2dvh;
+    margin-left: 3.8dvw;
+    margin-top: 1.5dvh;
+}
+
+.viewprofile-bg {
+  width: 100%;
+  height: auto;
+}
+
+.viewprofile-top-info {
+  height: 18dvh;
+  display: flex;
+  flex-direction: row;
+}
+
+.viewprofile-profession {
+  margin: 0px;
+  padding-left: 0.1dvw;
+  font-size: 2.3dvh;
+}
+
+.viewprofile-user-pic {
+  height: 12dvh;
+  width: 12dvh;
+  border-radius: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 2dvw;
+  margin-right: 1.5dvw;
+  border: solid;
+  border-color: white;
+}
+
+.viewprofile-form-prompt {
+  padding-top: 3.5dvh;
+  padding-bottom: 1.3dvh;
+  margin: 0px;
+  height: 6dvh;
+  font-weight: 900;
+  font-size: 5.9dvh;
+  text-align: left;
+  padding-left: 0dvw;
+}
+
+.viewprofile-form-line {
+  height: 0.1dvh;
+  margin-top: 0dvh;
+  margin-bottom: 0dvh;
+}
+
+.viewprofile-form-spec{
+    font-size: 3dvh;
+    font-weight: 600;
+    margin: 0;
+    margin-left: 2.4dvw;
+    margin-top: 2.3dvh;
+    margin-bottom: 1.5dvh;
+}
+
+.viewprofile-skill-list-cont {
+    margin-bottom: 2dvh;
+    margin-left: 3.1dvw;
+    margin-right: 3.1dvw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 52dvw;
+}
+
+.viewprofile-skill-content {
+    display: grid;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    height: 3.7dvh;
+    width: auto;
+    border-radius: 2.8dvh;
+    margin: 0.4dvh;
+    transition: opacity 0.15s;
+}
+
+.viewprofile-skill-content:hover {
+    opacity: 0.65;
+}
+
+.viewprofile-skill-text {
+    text-align: center;
+    font-size: 2dvh;
+    margin: 0px;
+    margin-top: 0.75dvh;
+    padding-left: 0.5dvw;
+    padding-right: 0.5dvw;
+}
+
+.viewprofile-contact-list-cont {
+    margin-bottom: 2dvh;
+    margin-left: 3.1dvw;
+    margin-right: 3.1dvw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 52dvw;
+}
+
+.viewprofile-contact-content {
+    display: grid;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    height: 3.7dvh;
+    width: auto;
+    border-radius: 2.8dvh;
+    margin: 0.4dvh;
+    transition: opacity 0.15s;
+}
+
+.viewprofile-contact-content:hover {
+    opacity: 0.65;
+}
+
+.viewprofile-contact-text {
+    text-align: center;
+    font-size: 2dvh;
+    margin: 0px;
+    margin-top: 0.75dvh;
+    padding-left: 0.5dvw;
+    padding-right: 0.5dvw;
+}
+
+.viewprofile-usercontact-text-btn {
+    background-color: white;
+    border: none;
+    text-align: center;
+    font-size: 1.7dvh;
+    margin: 0px;
+    padding-left: 0.5dvw;
+    padding-right: 0.6dvw;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 0px 3.5dvh 3.5dvh 0px;
+}

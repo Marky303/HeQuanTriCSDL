@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+// Importing style
+import "../../pagestyles/UserProfile.css";
+
+// Importing assets
+import userpicture from "../../assets/userplaceholder.jpg";
+
 // Importing AuthContext
 import AuthContext from "../../context/UserauthContext";
 
@@ -44,8 +50,6 @@ const UserProfile = () => {
         // Notify + Stop element from loading TODO
         notify("error", message);
       else {
-        // Do something...
-        console.log(data);
         setFound(true);
       }
     };
@@ -53,13 +57,82 @@ const UserProfile = () => {
     handler();
   }, []);
 
+  // Copy contact content
+  let copyContact = (e, text) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(text);
+    notify("info", "Copied contact!");
+  };
+
   return (
-    <div className="profileedit-page-wrapper">
-      <img className="profileedit-bg" src={background}></img>
+    <div className="viewprofile-page-wrapper">
+      <img className="viewprofile-bg" src={background}></img>
       {found ? (
-        <div className="profileedit-form-cont">
-          <p className="profileedit-form-prompt">{data.name}</p>
-          <hr className="profileedit-form-line"></hr>
+        <div className="viewprofile-form-cont">
+          <div className="viewprofile-top-info">
+            <img className="viewprofile-user-pic" src={userpicture}></img>
+            <div className="viewprofile-main-info-cont">
+              <p className="viewprofile-form-prompt">{data.name}</p>
+              <p className="viewprofile-profession">
+                {data.currentJob} - {data.currentLocation}
+              </p>
+            </div>
+          </div>
+          <hr className="viewprofile-form-line"></hr>
+          <div className="viewprofile-otherinfo-cont">
+            <div className="viewprofile-otherinfo-introduction-cont">
+              <p className="viewprofile-otherinfo-introduction-prompt">
+                Introduction
+              </p>
+              <p className="viewprofile-otherinfo-introduction-content">
+                {data.shortDesc}
+              </p>
+              <div className="viewprofile-cont">
+                <p className="viewprofile-form-spec">Skills</p>
+                <div className="viewprofile-skill-list-cont">
+                  {data.skills.map((skill) => {
+                    const skillSplitted = skill.split(":");
+                    return (
+                      <div
+                        key={skillSplitted[0]}
+                        className="viewprofile-skill-content"
+                      >
+                        <p className="viewprofile-skill-text">
+                          {skillSplitted[1]}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <p className="viewprofile-form-spec">Contacts</p>
+                <div className="viewprofile-contact-list-cont">
+                  {data.contacts.map((contact) => {
+                    const contactSplitted = contact.split(":");
+                    return (
+                      <div
+                        key={contactSplitted[0]}
+                        className="viewprofile-contact-content"
+                      >
+                        <p className="viewprofile-contact-text">
+                          {contactSplitted[1]}
+                        </p>
+                        <p className="vl"></p>
+                        <button
+                          type="button"
+                          className="viewprofile-usercontact-text-btn"
+                          onClick={(e) => {
+                            copyContact(e, contactSplitted[2]);
+                          }}
+                        >
+                          {contactSplitted[2]}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
         ""
