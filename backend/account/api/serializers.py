@@ -35,6 +35,15 @@ class UserinfoSerializer(ModelSerializer):
         model = UserAccount
         fields = ('email', 'name', 'currentJob', 'currentLocation', 'shortDesc', 'skills', 'contacts')
 
+# Get user info after login serializer
+class UserviewSerializer(ModelSerializer):
+    contacts = serializers.StringRelatedField(many=True)
+    skills = serializers.StringRelatedField(many=True)
+    
+    class Meta:
+        model = UserAccount
+        fields = ('name', 'currentJob', 'currentLocation', 'shortDesc', 'skills', 'contacts')
+
 # Note serializer
 class NoteSerializer(ModelSerializer):
     class Meta:

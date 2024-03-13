@@ -1,4 +1,4 @@
-from .serializers import NoteSerializer, UserinfoSerializer
+from .serializers import NoteSerializer, UserinfoSerializer, UserviewSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -248,7 +248,7 @@ def viewUserinfo(request):
         content = {'detail': 'User does not exist'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
-    serializer = UserinfoSerializer(user)
+    serializer = UserviewSerializer(user)
     return Response(serializer.data)
 
 # Example: get all notes of a certain user
