@@ -24,9 +24,11 @@ const ProfileEdit = () => {
   // Get fetching
   let { fetching } = useContext(AuthContext);
   useEffect(() => {
-    let element = document.getElementsByClassName("form-disabled");
-    if (fetching) element[0].setAttribute("disabled", "disabled");
-    else element[0].removeAttribute("disabled");
+    if (authTokens) {
+      let element = document.getElementsByClassName("form-disabled");
+      if (fetching) element[0].setAttribute("disabled", "disabled");
+      else element[0].removeAttribute("disabled");
+    }
   }, [fetching]);
 
   // Get update function
@@ -34,17 +36,19 @@ const ProfileEdit = () => {
 
   // Updating text fields
   useEffect(() => {
-    let element;
-    const textFieldList = [
-      "email",
-      "name",
-      "currentJob",
-      "currentLocation",
-      "shortDesc",
-    ];
-    for (let i of textFieldList) {
-      element = document.getElementsByName(i)[0];
-      element.setAttribute("value", userInfo[i]);
+    if (authTokens) {
+      let element;
+      const textFieldList = [
+        "email",
+        "name",
+        "currentJob",
+        "currentLocation",
+        "shortDesc",
+      ];
+      for (let i of textFieldList) {
+        element = document.getElementsByName(i)[0];
+        element.setAttribute("value", userInfo[i]);
+      }
     }
   }, []);
 
@@ -194,6 +198,7 @@ const ProfileEdit = () => {
                       <p className="usercontact-text">{contactSplitted[1]}</p>
                       <p className="vl"></p>
                       <button
+                        type="button"
                         className="usercontact-text-btn"
                         onClick={(e) => {
                           copyContact(e, contactSplitted[2]);
