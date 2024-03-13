@@ -4,7 +4,13 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+
+# Other libraries for functionality
 import ast
+import re
+
+# Email regex
+emailRegex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
 # Get user info view
 @api_view(['GET'])
@@ -33,13 +39,52 @@ def updateUserinfo(request):
     new_shortDesc = userinfo['shortDesc']
     
     # Check if sent user info is ok
-    # new_name
+    # new_name: non-null string + 255 character length
     if new_name=="":
         content = {'detail': 'New name cannot be blank'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
+    if len(new_name)>255:
+        content = {'detail': 'New name is too long'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
+    # new_email: check if new_email is valid + 255 character length
+    if re.fullmatch(emailRegex, new_email):
+        pass
+    else: 
+        content = {'detail': 'New email isn\'t valid'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
+    if len(new_email)>255:
+        content = {'detail': 'New email is too long'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    # new_currentJob: non-null string + 50 character length
+    if new_currentJob=="":
+        content = {'detail': 'New job cannot be blank'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    if len(new_currentJob)>50:
+        content = {'detail': 'New profession is too long'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    # new_currentLocation: non-null string + 120 character length
+    if new_currentLocation=="":
+        content = {'detail': 'New location cannot be blank'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    if len(new_currentLocation)>120:
+        content = {'detail': 'New location is too long'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    # new_shortDesc: non-null string + 100 character length
+    if new_shortDesc=="":
+        content = {'detail': 'New description cannot be blank'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    if len(new_shortDesc)>100:
+        content = {'detail': 'New description is too long'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
     # Edit user info
     user.name = new_name
