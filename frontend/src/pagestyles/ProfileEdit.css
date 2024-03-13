@@ -111,6 +111,7 @@
     border-radius: 1.85dvh;
     border: none;
     transition: opacity 0.15s;
+    font-size: 1.7dvh;
 }
 
 .add-skillcontact-btn:hover {
@@ -143,6 +144,9 @@
     width: 1.4dvw;
     border-radius: 0px 3.5dvh 3.5dvh 0px;
     border: none;
+    font-size: 1.5dvh;
+    padding-right: 0.55dvw;
+    padding-bottom: 0.25dvh;
 }
 
 .userskill-delete-btn:hover {
@@ -194,6 +198,8 @@
     width: 1.4dvw;
     border-radius: 0px 3.5dvh 3.5dvh 0px;
     border: none;
+    font-size: 1.5dvh;
+    padding-right: 0.4dvw;
 }
 
 .usercontact-delete-btn:hover {

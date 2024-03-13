@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 # Adding models
-from ..models import Skill, Contact
+from ..models import Skill, Contact, UserAccount
 
 # Other libraries for functionality
 import ast
@@ -35,13 +35,25 @@ def updateUserinfo(request):
     
     # Extract userinfo from request
     new_name = userinfo['name']
-    new_email = userinfo['email']
+    # new_email = userinfo['email']
     new_currentJob = userinfo['currentJob']
     new_currentLocation = userinfo['currentLocation']
     new_shortDesc = userinfo['shortDesc']
     
     # Check if sent user info is ok
-    # new_name: non-null string + 255 character length
+    # new_name: non-null string + 255 character length + unique constraint
+    isUnique = False
+    try:
+        check_user = UserAccount.objects.get(name=new_name)
+    except:
+        isUnique = True
+    if (new_name==user.name):
+        isUnique = True
+    
+    if not isUnique:
+        content = {'detail': 'Name has already been taken'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
     if new_name=="":
         content = {'detail': 'New name cannot be blank'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
@@ -51,15 +63,15 @@ def updateUserinfo(request):
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
     # new_email: check if new_email is valid + 255 character length
-    if re.fullmatch(emailRegex, new_email):
-        pass
-    else: 
-        content = {'detail': 'New email isn\'t valid'}
-        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    # if re.fullmatch(emailRegex, new_email):
+    #     pass
+    # else: 
+    #     content = {'detail': 'New email isn\'t valid'}
+    #     return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
-    if len(new_email)>255:
-        content = {'detail': 'New email is too long'}
-        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    # if len(new_email)>255:
+    #     content = {'detail': 'New email is too long'}
+    #     return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
     # new_currentJob: non-null string + 50 character length
     if new_currentJob=="":
@@ -90,7 +102,7 @@ def updateUserinfo(request):
     
     # Edit user info
     user.name = new_name
-    user.email = new_email
+    # user.email = new_email
     user.currentJob = new_currentJob
     user.currentLocation = new_currentLocation
     user.shortDesc = new_shortDesc
@@ -218,6 +230,26 @@ def deleteUsercontact(request):
     # Response accepted (good) status
     content = {'detail': 'Contact deleted successfully'}
     return Response(content, status=status.HTTP_202_ACCEPTED)
+
+@api_view(['POST'])
+def viewUserinfo(request):
+    # Converting request.body to dictionary type
+    dict = request.body.decode("UTF-8")
+    body = ast.literal_eval(dict)
+    
+    # Extract user contact id from request
+    name = body['name']
+    
+    # Return user information
+    try:
+        user = UserAccount.objects.get(name=name)
+    except:
+        # Cannot find user with name
+        content = {'detail': 'User does not exist'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    serializer = UserinfoSerializer(user)
+    return Response(serializer.data)
 
 # Example: get all notes of a certain user
 @api_view(['GET'])
