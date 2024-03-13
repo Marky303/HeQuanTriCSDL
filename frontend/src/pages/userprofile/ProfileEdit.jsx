@@ -198,6 +198,7 @@ const ProfileEdit = () => {
                       <p className="usercontact-text">{contactSplitted[1]}</p>
                       <p className="vl"></p>
                       <button
+                        type="button"
                         className="usercontact-text-btn"
                         onClick={(e) => {
                           copyContact(e, contactSplitted[2]);
