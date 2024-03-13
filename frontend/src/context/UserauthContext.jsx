@@ -365,14 +365,16 @@ export const AuthProvider = () => {
     notify(notifType, message);
   };
 
-  let addUsercontact = async (contactType, contactContent) => {
-    console.log("called!")
-
+  let deleteUsertag = async (id, type) => {
     // Set fetching to true
     setFetching((fetching = true));
 
+    // Change the link accordingly
+    let link = "http://localhost:8000/account/deleteuser" + type;
+    console.log(link)
+
     // Sending adding skill request
-    let response = await fetch("http://localhost:8000/account/addusercontact/", {
+    let response = await fetch(link, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -382,10 +384,44 @@ export const AuthProvider = () => {
           String(JSON.parse(localStorage.getItem("authTokens")).access),
       },
       body: JSON.stringify({
-        contactType: contactType,
-        contactContent: contactContent,
+        id: id,
       }),
     });
+    let data = await response.json();
+
+    // Set fetching to false
+    setFetching((fetching = false));
+
+    let message = data.detail;
+    let notifType = response.status == 202 ? "success" : "error";
+    if (response.status == 202)
+      // Get new user info on successful response/edit
+      getUserinfo(false);
+    notify(notifType, message);
+  };
+
+  let addUsercontact = async (contactType, contactContent) => {
+    // Set fetching to true
+    setFetching((fetching = true));
+
+    // Sending adding skill request
+    let response = await fetch(
+      "http://localhost:8000/account/addusercontact/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Something is wrong here
+          Authorization:
+            "Bearer " +
+            String(JSON.parse(localStorage.getItem("authTokens")).access),
+        },
+        body: JSON.stringify({
+          contactType: contactType,
+          contactContent: contactContent,
+        }),
+      }
+    );
     let data = await response.json();
 
     // Set fetching to false
@@ -417,6 +453,7 @@ export const AuthProvider = () => {
     updateUserInfo: updateUserInfo,
     addUserskill: addUserskill,
     addUsercontact: addUsercontact,
+    deleteUsertag: deleteUsertag,
   };
 
   useEffect(() => {

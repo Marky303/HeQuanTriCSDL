@@ -74,6 +74,12 @@ const ProfileEdit = () => {
     }
   };
 
+  // Handle skill deleting
+  let { deleteUsertag } = useContext(AuthContext);
+  let deleteTagHandler = (id, type) => {
+    deleteUsertag(id, type);
+  };
+
   // Handle contact adding
   let { addUsercontact } = useContext(AuthContext);
   let displayContactPopup = (e) => {
@@ -154,7 +160,13 @@ const ProfileEdit = () => {
                   return (
                     <div key={skillSplitted[0]} className="userskill-content">
                       <p className="userskill-text">{skillSplitted[1]}</p>
-                      <button className="userskill-delete-btn" type="button">
+                      <button
+                        onClick={() =>
+                          deleteTagHandler(skillSplitted[0], "skill/")
+                        }
+                        className="userskill-delete-btn"
+                        type="button"
+                      >
                         x
                       </button>
                     </div>
@@ -189,7 +201,13 @@ const ProfileEdit = () => {
                       >
                         {contactSplitted[2]}
                       </button>
-                      <button className="usercontact-delete-btn" type="button">
+                      <button
+                        onClick={() =>
+                          deleteTagHandler(contactSplitted[0], "contact/")
+                        }
+                        className="usercontact-delete-btn"
+                        type="button"
+                      >
                         x
                       </button>
                     </div>

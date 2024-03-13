@@ -99,7 +99,7 @@ def updateUserinfo(request):
     user.save()
     
     # Response accepted (good) status
-    content = {'detail': 'User profile changed successfully'}
+    content = {'detail': 'Profile changed successfully'}
     return Response(content, status=status.HTTP_202_ACCEPTED)
     
 # Add new skill view
@@ -126,10 +126,38 @@ def addUserskill(request):
     new_skill_object.save()
     
     # Response accepted (good) status
-    content = {'detail': 'User skill added successfully'}
+    content = {'detail': 'Skill added successfully'}
     return Response(content, status=status.HTTP_202_ACCEPTED)
 
-# Add new skill view
+# Delete user skill view
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def deleteUserskill(request):
+    # Get user from request
+    user = request.user
+    
+    # Converting request.body to dictionary type
+    dict = request.body.decode("UTF-8")
+    userSkill = ast.literal_eval(dict)
+    
+    # Extract user skill id from request
+    id = userSkill['id']
+    
+    # Delete skill that BELONGS TO the user
+    skills = user.skills.all()
+    try:
+        delete_skill = skills.get(id=id)
+    except:
+        # Cannot find skill with "id" in user's skillset
+        content = {'detail': 'Cannot find user skill'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    delete_skill.delete()
+    
+    # Response accepted (good) status
+    content = {'detail': 'Skill deleted successfully'}
+    return Response(content, status=status.HTTP_202_ACCEPTED)
+
+# Add new contact view
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def addUsercontact(request):
@@ -160,7 +188,35 @@ def addUsercontact(request):
     new_contact_object.save()
     
     # Response accepted (good) status
-    content = {'detail': 'User contact added successfully'}
+    content = {'detail': 'Contact added successfully'}
+    return Response(content, status=status.HTTP_202_ACCEPTED)
+
+# Delete user skill view
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def deleteUsercontact(request):
+    # Get user from request
+    user = request.user
+    
+    # Converting request.body to dictionary type
+    dict = request.body.decode("UTF-8")
+    userContact = ast.literal_eval(dict)
+    
+    # Extract user contact id from request
+    id = userContact['id']
+    
+    # Delete contact that BELONGS TO the user
+    contacts = user.contacts.all()
+    try:
+        delete_contact = contacts.get(id=id)
+    except:
+        # Cannot find skill with "id" in user's skillset
+        content = {'detail': 'Cannot find user contact'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    delete_contact.delete()
+    
+    # Response accepted (good) status
+    content = {'detail': 'Contact deleted successfully'}
     return Response(content, status=status.HTTP_202_ACCEPTED)
 
 # Example: get all notes of a certain user
