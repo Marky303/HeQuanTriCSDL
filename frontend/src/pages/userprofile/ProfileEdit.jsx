@@ -63,6 +63,17 @@ const ProfileEdit = () => {
     updateUserInfo(e);
   };
 
+  // Display form on hover
+  let { addUserskill } = useContext(AuthContext);
+  let displaySkillPopup = (e) => {
+    let skill = prompt("Please enter your skill:");
+    if (skill == null || skill == "") {
+      notify("warning", "Cancelled adding skill");
+    } else {
+      addUserskill(skill);
+    }
+  };
+
   // Private route implemented
   return authTokens ? (
     <div className="profileedit-page-wrapper">
@@ -125,10 +136,18 @@ const ProfileEdit = () => {
                 {userInfo.skills.map((skill) => (
                   <div className="userskill-content">
                     <p className="userskill-text">{skill}</p>
-                    <button className="userskill-delete-btn">x</button>
+                    <button className="userskill-delete-btn" type="button">
+                      x
+                    </button>
                   </div>
                 ))}
-                <button className="add-skillcontact-btn">+</button>
+                <button
+                  className="add-skillcontact-btn"
+                  type="button"
+                  onClick={() => displaySkillPopup()}
+                >
+                  +
+                </button>
               </div>
             </div>
             <div className="usercontact-cont">
@@ -148,11 +167,15 @@ const ProfileEdit = () => {
                       >
                         {contactSplitted[1]}
                       </button>
-                      <button className="usercontact-delete-btn">x</button>
+                      <button className="usercontact-delete-btn" type="button">
+                        x
+                      </button>
                     </div>
                   );
                 })}
-                <button className="add-skillcontact-btn">+</button>
+                <button className="add-skillcontact-btn" type="button">
+                  +
+                </button>
               </div>
             </div>
             <button className="profileedit-submit-btn" type="submit">

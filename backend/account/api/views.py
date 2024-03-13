@@ -1,9 +1,11 @@
-# Note example
 from .serializers import NoteSerializer, UserinfoSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+
+# Adding models
+from ..models import Skill
 
 # Other libraries for functionality
 import ast
@@ -100,8 +102,27 @@ def updateUserinfo(request):
     content = {'detail': 'User profile changed successfully'}
     return Response(content, status=status.HTTP_202_ACCEPTED)
     
+# Add new skill view
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addUserskill(request):
+    # Get user from request
+    user = request.user
     
-
+    # Converting request.body to dictionary type
+    dict = request.body.decode("UTF-8")
+    userSkill = ast.literal_eval(dict)
+    
+    # Extract userinfo from request
+    new_skill = userSkill['skill']
+    
+    # Adding new skill that belongs to user
+    new_skill_object = Skill(UserAccount = user, skillContent = new_skill)
+    new_skill_object.save()
+    
+    # Response accepted (good) status
+    content = {'detail': 'User skill added successfully'}
+    return Response(content, status=status.HTTP_202_ACCEPTED)
 
 
 # Example: get all notes of a certain user

@@ -334,6 +334,37 @@ export const AuthProvider = () => {
     notify(notifType, message);
   };
 
+  let addUserskill = async (skill) => {
+    // Set fetching to true
+    setFetching((fetching = true));
+
+    // Sending adding skill request
+    let response = await fetch("http://localhost:8000/account/adduserskill/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Something is wrong here
+        Authorization:
+          "Bearer " +
+          String(JSON.parse(localStorage.getItem("authTokens")).access),
+      },
+      body: JSON.stringify({
+        skill: skill,
+      }),
+    });
+    let data = await response.json();
+
+    // Set fetching to false
+    setFetching((fetching = false));
+
+    let message = data.detail;
+    let notifType = response.status == 202 ? "success" : "error";
+    if (response.status == 202)
+      // Get new user info on successful response/edit
+      getUserinfo(false);
+    notify(notifType, message);
+  };
+
   // Declaring context data to pass to other components
   let contextData = {
     // userauth related variables
@@ -350,6 +381,7 @@ export const AuthProvider = () => {
     sendResetRequest: sendResetRequest,
     resetPassword: resetPassword,
     updateUserInfo: updateUserInfo,
+    addUserskill: addUserskill,
   };
 
   useEffect(() => {
