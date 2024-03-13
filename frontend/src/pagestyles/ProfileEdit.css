@@ -1,0 +1,280 @@
+.profileedit-page-wrapper {
+    position: relative;
+}
+
+.profileedit-form-cont {
+    left: 50%;
+    top: 7%;
+    transform: translate(-50%);
+
+    position: absolute;
+    background-color: rgb(203, 203, 203);
+    width: 60dvw;
+    height: auto;
+    border-radius: 2.8dvh
+}
+
+.profileedit-bg {
+    width: 100%;
+    height: auto;
+}
+
+.profileedit-form-prompt {
+    padding-top: 3dvh;
+    padding-bottom: 3dvh;
+    margin: 0px;
+    height: 6dvh;
+    font-weight: 900;
+    font-size: 5.2dvh;
+    text-align: center;
+}
+
+.profileedit-form-line {
+    height: 0.1dvh;
+    margin-top: 0dvh;
+    margin-bottom: 3dvh;
+}
+
+.form-disabled {
+    display: grid;
+    border: none;
+}
+
+.profileedit-form {
+    display: grid;
+    padding-bottom: 3.5dvh;
+}
+
+.profileedit-fields-twocolumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-spec {
+    font-size: 2.5dvh;
+    padding-left: 2dvw;
+    margin: 0px;
+    margin-bottom: 2.1dvh;
+}
+
+.profileedit-form-input {
+    font-size: 2dvh;
+    height: 3.7dvh;
+    width: 21dvw;
+    border-radius: 3.5dvh;
+    margin-left: 3.5dvw;
+    margin-bottom: 2dvh;
+    padding-left: 1dvw;
+    border: none;
+    transition: opacity 0.15s;
+}
+
+.profileedit-form-input:hover {
+    opacity: 0.65;
+}
+
+.profileedit-form-input-desc {
+    font-size: 2dvh;
+    height: 3.7dvh;
+    width: 43dvw;
+    border-radius: 3.5dvh;
+    margin-left: 3.5dvw;
+    margin-bottom: 2dvh;
+    padding-left: 1dvw;
+    border: none;
+    transition: opacity 0.15s;
+}
+
+.profileedit-form-input-desc:hover {
+    opacity: 0.65;
+}
+
+.userskill-list-cont {
+    margin-bottom: 2dvh;
+    margin-left: 3.1dvw;
+    margin-right: 3.1dvw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 52dvw;
+}
+
+.add-skillcontact-btn {
+    height: 3.7dvh;
+    width: 3.7dvh;
+    margin: 0.4dvh;
+    border-radius: 1.85dvh;
+    border: none;
+    transition: opacity 0.15s;
+    font-size: 1.7dvh;
+}
+
+.add-skillcontact-btn:hover {
+    opacity: 0.8;
+    border: solid;
+    border-width: 0.1dvh;
+}
+
+.add-skillcontact-btn:active {
+    opacity: 0.2;
+}
+
+.userskill-content {
+    display: grid;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    height: 3.7dvh;
+    width: auto;
+    border-radius: 2.8dvh;
+    margin: 0.4dvh;
+    transition: opacity 0.15s;
+}
+
+.userskill-content:hover {
+    opacity: 0.65;
+}
+
+.userskill-delete-btn {
+    width: 1.4dvw;
+    border-radius: 0px 3.5dvh 3.5dvh 0px;
+    border: none;
+    font-size: 1.5dvh;
+    padding-right: 0.55dvw;
+    padding-bottom: 0.25dvh;
+}
+
+.userskill-delete-btn:hover {
+    border: solid;
+    border: 0.8dvh;
+    background-color: rgb(165, 165, 165);
+}
+
+.userskill-delete-btn:active {
+    opacity: 0.5;
+    background-color: rgb(133, 133, 133);
+}
+
+.userskill-text {
+    text-align: center;
+    font-size: 2dvh;
+    margin: 0px;
+    margin-top: 0.75dvh;
+    padding-left: 0.5dvw;
+    padding-right: 0.5dvw;
+}
+
+.usercontact-list-cont {
+    margin-left: 3.1dvw;
+    margin-right: 3.1dvw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 52dvw;
+}
+
+.usercontact-content {
+    display: grid;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    height: 3.7dvh;
+    width: auto;
+    border-radius: 2.8dvh;
+    margin: 0.4dvh;
+    transition: opacity 0.15s;
+}
+
+.usercontact-content:hover {
+    opacity: 0.65;
+}
+
+.usercontact-delete-btn {
+    width: 1.4dvw;
+    border-radius: 0px 3.5dvh 3.5dvh 0px;
+    border: none;
+    font-size: 1.5dvh;
+    padding-right: 0.4dvw;
+}
+
+.usercontact-delete-btn:hover {
+    border: solid;
+    border: 0.8dvh;
+    background-color: rgb(165, 165, 165);
+}
+
+.usercontact-delete-btn:active {
+    opacity: 0.5;
+    background-color: rgb(133, 133, 133);
+}
+
+.usercontact-text-btn {
+    background-color: white;
+    border: none;
+    text-align: center;
+    font-size: 1.7dvh;
+    margin: 0px;
+    margin-top: 0.3dvh;
+    padding-left: 0.5dvw;
+    padding-right: 0.5dvw;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.usercontact-text {
+    text-align: center;
+    font-size: 2dvh;
+    margin: 0px;
+    margin-top: 0.75dvh;
+    padding-left: 0.5dvw;
+    padding-right: 0.5dvw;
+}
+
+.vl {
+    margin: 0px;
+    margin-top: 0.1dvh;
+    margin-bottom: 0.1dvh;
+    border-left: 0.08dvw solid rgb(0, 0, 0);
+    height: auto;
+  }
+
+.profileedit-submit-btn {
+    font-size: 2dvh;
+    height: 4dvh;
+    width: 16dvw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4dvh;
+    border-radius: 4dvh;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.profileedit-submit-btn:hover {
+    opacity: 0.8;
+    border: solid;
+    border-width: 0.1dvh;
+}
+
+.profileedit-submit-btn:active {
+    opacity: 0.2;
+}
+
+.profileedit-redirect-cont {
+    display: grid;
+    grid-template-columns: 1fr 0.2fr 1fr;
+}
+
+.or-redirect-text {
+    font-size: 2.3dvh;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 3.8dvh;
+}
+
+.profileedit-redirect {
+    font-size: 2.3dvh;
+    text-align: center;
+    margin-top: 3.8dvh;
+}

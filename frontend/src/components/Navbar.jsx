@@ -34,6 +34,7 @@ const Navbar = () => {
     notification;
   }, [notification]);
 
+  // TODO: change profile edit <Link> to <button>
   return (
     <div className="navbar-cont">
       <Link to={authTokens ? "/" : "/home"} className="home-link-cont">
@@ -66,8 +67,9 @@ const Navbar = () => {
         {authTokens ? (
           <div className="auth-view-cont">
             <p className="welcome-text">
-              {" "}
+            <Link to="/profileedit" className="welcome-prompt-cont">
               Hello {userInfo ? userInfo.name : ""}!{" "}
+            </Link>
             </p>
             <button className="logout-btn" onClick={logoutUser}>
               Logout
