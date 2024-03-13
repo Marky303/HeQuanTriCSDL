@@ -18,6 +18,7 @@ import Home from "./pages/Home";
 
 // Importing profile related pages
 import ProfileEdit from "./pages/userprofile/ProfileEdit";
+import UserProfile from "./pages/userprofile/UserProfile";
 
 // Importing userath related pages
 import Login from "./pages/userauth/Login";
@@ -40,6 +41,7 @@ const App = () => (
         <Route exact path="/" element={<AuthProvider />}>
           <Route path="/" element={<Layout />}>
             <Route exact path="/" element={<Home />} />
+
             <Route exact path="/profileedit" element={<ProfileEdit />} />
 
             <Route exact path="/login" element={<Login />} />
@@ -52,6 +54,7 @@ const App = () => (
               element={<ResetPasswordConfirm />}
             />
 
+            <Route exact path="/viewprofile/:name" element={<UserProfile />} />
             <Route exact path="/home" element={<Opening />} />
             <Route exact path="/contacts" element={<Contacts />} />
             <Route exact path="/learn" element={<Learn />} />

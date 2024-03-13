@@ -87,7 +87,6 @@ export const AuthProvider = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // Something is wrong here
         Authorization:
           "Bearer " +
           String(JSON.parse(localStorage.getItem("authTokens")).access),
@@ -307,7 +306,6 @@ export const AuthProvider = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Something is wrong here
           Authorization:
             "Bearer " +
             String(JSON.parse(localStorage.getItem("authTokens")).access),
@@ -343,7 +341,6 @@ export const AuthProvider = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Something is wrong here
         Authorization:
           "Bearer " +
           String(JSON.parse(localStorage.getItem("authTokens")).access),
@@ -371,14 +368,12 @@ export const AuthProvider = () => {
 
     // Change the link accordingly
     let link = "http://localhost:8000/account/deleteuser" + type;
-    console.log(link)
 
     // Sending adding skill request
     let response = await fetch(link, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Something is wrong here
         Authorization:
           "Bearer " +
           String(JSON.parse(localStorage.getItem("authTokens")).access),
@@ -411,7 +406,6 @@ export const AuthProvider = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Something is wrong here
           Authorization:
             "Bearer " +
             String(JSON.parse(localStorage.getItem("authTokens")).access),
@@ -467,6 +461,7 @@ export const AuthProvider = () => {
     let contactsRegex = /contacts/g;
     let learnRegex = /learn/g;
     let productsRegex = /products/g;
+    let viewprofileRegex = /viewprofile/g;
 
     // Check if this route need token updating
     if (
@@ -478,7 +473,8 @@ export const AuthProvider = () => {
         openingRegex.test(location.pathname) ||
         contactsRegex.test(location.pathname) ||
         learnRegex.test(location.pathname) ||
-        productsRegex.test(location.pathname)
+        productsRegex.test(location.pathname) ||
+        viewprofileRegex.test(location.pathname)
       )
     ) {
       if (loading) {

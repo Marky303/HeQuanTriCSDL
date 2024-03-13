@@ -117,6 +117,7 @@ const ProfileEdit = () => {
                   type="text"
                   name="email"
                   placeholder="Edit your email"
+                  disabled="disabled"
                 />
               </div>
               <div className="form-spec-wrapper">
