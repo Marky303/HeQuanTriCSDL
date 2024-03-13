@@ -11,4 +11,6 @@ urlpatterns = [
     path('updateuserinfo/', views.updateUserinfo),
     path('adduserskill/', views.addUserskill),
     path('addusercontact/',views.addUsercontact),
+    path('deleteuserskill/', views.deleteUserskill),
+    path('deleteusercontact/', views.deleteUsercontact),
 ]

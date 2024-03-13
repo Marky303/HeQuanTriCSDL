@@ -24,9 +24,11 @@ const ProfileEdit = () => {
   // Get fetching
   let { fetching } = useContext(AuthContext);
   useEffect(() => {
-    let element = document.getElementsByClassName("form-disabled");
-    if (fetching) element[0].setAttribute("disabled", "disabled");
-    else element[0].removeAttribute("disabled");
+    if (authTokens) {
+      let element = document.getElementsByClassName("form-disabled");
+      if (fetching) element[0].setAttribute("disabled", "disabled");
+      else element[0].removeAttribute("disabled");
+    }
   }, [fetching]);
 
   // Get update function
@@ -34,17 +36,19 @@ const ProfileEdit = () => {
 
   // Updating text fields
   useEffect(() => {
-    let element;
-    const textFieldList = [
-      "email",
-      "name",
-      "currentJob",
-      "currentLocation",
-      "shortDesc",
-    ];
-    for (let i of textFieldList) {
-      element = document.getElementsByName(i)[0];
-      element.setAttribute("value", userInfo[i]);
+    if (authTokens) {
+      let element;
+      const textFieldList = [
+        "email",
+        "name",
+        "currentJob",
+        "currentLocation",
+        "shortDesc",
+      ];
+      for (let i of textFieldList) {
+        element = document.getElementsByName(i)[0];
+        element.setAttribute("value", userInfo[i]);
+      }
     }
   }, []);
 
@@ -72,6 +76,12 @@ const ProfileEdit = () => {
     } else {
       addUserskill(skill);
     }
+  };
+
+  // Handle skill deleting
+  let { deleteUsertag } = useContext(AuthContext);
+  let deleteTagHandler = (id, type) => {
+    deleteUsertag(id, type);
   };
 
   // Handle contact adding
@@ -154,7 +164,13 @@ const ProfileEdit = () => {
                   return (
                     <div key={skillSplitted[0]} className="userskill-content">
                       <p className="userskill-text">{skillSplitted[1]}</p>
-                      <button className="userskill-delete-btn" type="button">
+                      <button
+                        onClick={() =>
+                          deleteTagHandler(skillSplitted[0], "skill/")
+                        }
+                        className="userskill-delete-btn"
+                        type="button"
+                      >
                         x
                       </button>
                     </div>
@@ -189,7 +205,13 @@ const ProfileEdit = () => {
                       >
                         {contactSplitted[2]}
                       </button>
-                      <button className="usercontact-delete-btn" type="button">
+                      <button
+                        onClick={() =>
+                          deleteTagHandler(contactSplitted[0], "contact/")
+                        }
+                        className="usercontact-delete-btn"
+                        type="button"
+                      >
                         x
                       </button>
                     </div>
