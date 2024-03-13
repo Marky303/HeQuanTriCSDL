@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 # Adding models
-from ..models import Skill
+from ..models import Skill, Contact
 
 # Other libraries for functionality
 import ast
@@ -116,6 +116,11 @@ def addUserskill(request):
     # Extract userinfo from request
     new_skill = userSkill['skill']
     
+    # Checking eligibility
+    if len(new_skill)>20:
+        content = {'detail': 'New skill is too long'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
     # Adding new skill that belongs to user
     new_skill_object = Skill(UserAccount = user, skillContent = new_skill)
     new_skill_object.save()
@@ -124,6 +129,39 @@ def addUserskill(request):
     content = {'detail': 'User skill added successfully'}
     return Response(content, status=status.HTTP_202_ACCEPTED)
 
+# Add new skill view
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addUsercontact(request):
+    # Get user from request
+    user = request.user
+    
+    # Converting request.body to dictionary type
+    dict = request.body.decode("UTF-8")
+    userContact = ast.literal_eval(dict)
+    
+    # Extract userinfo from request
+    new_contactType = userContact['contactType']
+    new_contactContent = userContact['contactContent']
+    
+    print(new_contactType+new_contactContent)
+    
+    # Checking eligibility
+    if len(new_contactType)>20:
+        content = {'detail': 'New contact type is too long'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    if len(new_contactContent)>120:
+        content = {'detail': 'New contact content is too long'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Adding new contact that belongs to user
+    new_contact_object = Contact(UserAccount = user, contactType = new_contactType, contactContent = new_contactContent)
+    new_contact_object.save()
+    
+    # Response accepted (good) status
+    content = {'detail': 'User contact added successfully'}
+    return Response(content, status=status.HTTP_202_ACCEPTED)
 
 # Example: get all notes of a certain user
 @api_view(['GET'])

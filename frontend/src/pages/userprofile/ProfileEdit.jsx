@@ -63,7 +63,7 @@ const ProfileEdit = () => {
     updateUserInfo(e);
   };
 
-  // Display form on hover
+  // Handle skill adding
   let { addUserskill } = useContext(AuthContext);
   let displaySkillPopup = (e) => {
     let skill = prompt("Please enter your skill:");
@@ -71,6 +71,22 @@ const ProfileEdit = () => {
       notify("warning", "Cancelled adding skill");
     } else {
       addUserskill(skill);
+    }
+  };
+
+  // Handle contact adding
+  let { addUsercontact } = useContext(AuthContext);
+  let displayContactPopup = (e) => {
+    let contactType = prompt("Please enter your contact type:");
+    if (contactType == null || contactType == "") {
+      notify("warning", "Cancelled adding contact");
+      return;
+    }
+    let contactContent = prompt("Please enter your contact info:");
+    if (contactContent == null || contactContent == "") {
+      notify("warning", "Cancelled adding contact");
+    } else {
+      addUsercontact(contactType, contactContent);
     }
   };
 
@@ -133,14 +149,17 @@ const ProfileEdit = () => {
             <div className="userskill-cont">
               <p className="form-spec">Skills</p>
               <div className="userskill-list-cont">
-                {userInfo.skills.map((skill) => (
-                  <div className="userskill-content">
-                    <p className="userskill-text">{skill}</p>
-                    <button className="userskill-delete-btn" type="button">
-                      x
-                    </button>
-                  </div>
-                ))}
+                {userInfo.skills.map((skill) => {
+                  const skillSplitted = skill.split(":");
+                  return (
+                    <div key={skillSplitted[0]} className="userskill-content">
+                      <p className="userskill-text">{skillSplitted[1]}</p>
+                      <button className="userskill-delete-btn" type="button">
+                        x
+                      </button>
+                    </div>
+                  );
+                })}
                 <button
                   className="add-skillcontact-btn"
                   type="button"
@@ -156,16 +175,19 @@ const ProfileEdit = () => {
                 {userInfo.contacts.map((contact) => {
                   const contactSplitted = contact.split(":");
                   return (
-                    <div className="usercontact-content">
-                      <p className="usercontact-text">{contactSplitted[0]}</p>
+                    <div
+                      key={contactSplitted[0]}
+                      className="usercontact-content"
+                    >
+                      <p className="usercontact-text">{contactSplitted[1]}</p>
                       <p className="vl"></p>
                       <button
                         className="usercontact-text-btn"
                         onClick={(e) => {
-                          copyContact(e, contactSplitted[1]);
+                          copyContact(e, contactSplitted[2]);
                         }}
                       >
-                        {contactSplitted[1]}
+                        {contactSplitted[2]}
                       </button>
                       <button className="usercontact-delete-btn" type="button">
                         x
@@ -173,7 +195,11 @@ const ProfileEdit = () => {
                     </div>
                   );
                 })}
-                <button className="add-skillcontact-btn" type="button">
+                <button
+                  onClick={() => displayContactPopup()}
+                  className="add-skillcontact-btn"
+                  type="button"
+                >
                   +
                 </button>
               </div>
