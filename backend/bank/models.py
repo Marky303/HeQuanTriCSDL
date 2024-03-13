@@ -32,7 +32,7 @@ class Card(models.Model):
     expiration = models.DateTimeField(default=dt.datetime.today()+dt.timedelta(days=90), blank=True)
     
     # Card functions
-    def createNewCard(name):
+    def createNewCard(name, user):
         # Generate a unique cardNumber
         number = ccard.visa()
         isUnique = False
@@ -51,7 +51,7 @@ class Card(models.Model):
         # Generate a CVV
         cvv = random.randint(100, 999)
         
-        card = Card(name=name, number=str(number), cvv=str(cvv))
+        card = Card(UserAccount=user, name=name, number=str(number), cvv=str(cvv))
         card.save()
         
         # Return card object to link user (needed?)
@@ -75,23 +75,24 @@ class Transaction(models.Model):
     
     # Make a transaction
     def createNewTransaction(name,amount,user,card):
-        # Check if card belongs to user
+        # Check if card belongs to user (str is causing the funny)
         if not card in user.cards.all():
-            return
+            return "nocard"
 
         # Check if the transaction is eligible (card.bal must be positive)
         if ((card.bal+amount) < 0):
-            return
+            return "insufficientbal"
         
         # Take out the amount (either plus/minus)
         card.bal += amount
+        card.save()
         
         # Actually create transaction instance of the model
         transaction = Transaction(UserAccount=user, Card=card, name=name, amount=amount)
         transaction.save()
         
         # Return reference to transaction (transaction succeed sign, can be done differently)
-        return transaction 
+        return "success" 
     
     # Django admin test
     def __str__(self):
