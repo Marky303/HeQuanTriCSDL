@@ -8,6 +8,6 @@ urlpatterns = [
     # path('getcardinfo/', views.getCardinfo),
     path('getcardsinfo/', views.getCardsinfo),
     path('createcard/', views.createCard),
-    path('gettransactionsinfo/', views.getTransactionsinfo),
-    path('maketransaction/', views.createTransaction)
+    path('maketransaction/', views.createTransaction),
+    path('gettransactionsinfo/', views.getTransactionsinfo)
 ]

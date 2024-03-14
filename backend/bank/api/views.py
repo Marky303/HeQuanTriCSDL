@@ -120,9 +120,31 @@ def createTransaction(request):
 def getTransactionsinfo(request):
     user = request.user
 
-    # Getting all user cards
+    # Converting request.body to dictionary type
+    dict = request.body.decode("UTF-8")
+    data = ast.literal_eval(dict)
+    
+    # Extracting transaction data from request
+    id = data['id']
+    dayStart = data['dayStart']
+    dayEnd = data['dayEnd']
+
+    # Query
+    # Get all user's transaction
+    if id == "null":
+        pass
+        
+
+
+
+
+
+
+
+
+    # Getting all user transactions
     transactions = user.transactions.all()
     
-    # Serialize card and return response
+    # Serialize transactions and return response
     serializer = TransactionSerializer(transactions, many=True)
     return Response(serializer.data)

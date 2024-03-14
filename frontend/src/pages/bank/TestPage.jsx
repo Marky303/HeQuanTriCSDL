@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 
+// Import style
+import "../../pagestyles/bank/TestPage.css"
+
 // Importing bank context
 import BankContext from "../../context/BankContext";
 
