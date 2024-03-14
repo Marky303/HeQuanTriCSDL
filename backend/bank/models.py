@@ -73,6 +73,7 @@ class Transaction(models.Model):
     creation = models.DateTimeField(default=dt.datetime.today(), blank=True)
     amount = models.DecimalField(max_digits=19, decimal_places=4, default=0)
     
+    
     # Make a transaction
     def createNewTransaction(name,amount,user,card):
         # Check if card belongs to user (str is causing the funny)
