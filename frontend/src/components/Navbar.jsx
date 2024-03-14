@@ -44,7 +44,20 @@ const Navbar = () => {
 
       <div className="search-cont">
         {authTokens ? (
-          <p className="placeholder-text">Navbar when logged in!</p>
+          <div className="nouser-content-cont">
+          <div className="filler"></div>
+          <div className="nouser-button-cont">
+            <a className="navbar-anchor" href="/bank/test">
+              <button className="navbar-anchor-btn">Test</button>
+            </a>
+            <a className="navbar-anchor" href="/bank/cards">
+              <button className="navbar-anchor-btn">Cards</button>
+            </a>
+            <a className="navbar-anchor" href="/bank/transacrion">
+              <button className="navbar-anchor-btn">Transacrion</button>
+            </a>
+          </div>
+        </div>
         ) : (
           <div className="nouser-content-cont">
             <div className="filler"></div>
@@ -67,9 +80,9 @@ const Navbar = () => {
         {authTokens ? (
           <div className="auth-view-cont">
             <p className="welcome-text">
-            <Link to="/profileedit" className="welcome-prompt-cont">
-              Hello {userInfo ? userInfo.name : ""}!{" "}
-            </Link>
+              <Link to="/profileedit" className="welcome-prompt-cont">
+                Hello {userInfo ? userInfo.name : ""}!{" "}
+              </Link>
             </p>
             <button className="logout-btn" onClick={logoutUser}>
               Logout

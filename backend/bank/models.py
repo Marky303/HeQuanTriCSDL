@@ -62,9 +62,6 @@ class Card(models.Model):
         return str(self.number)
     
 class Transaction(models.Model):
-    # Foreign key to user who made the transaction
-    UserAccount = models.ForeignKey(UserAccount, related_name='transactions', on_delete=models.CASCADE, null=True)
-    
     # Foreign key to the card that facilitated the transaction
     Card = models.ForeignKey(Card, related_name='transactions', on_delete=models.CASCADE, null=True)
     
@@ -89,7 +86,7 @@ class Transaction(models.Model):
         card.save()
         
         # Actually create transaction instance of the model
-        transaction = Transaction(UserAccount=user, Card=card, name=name, amount=amount)
+        transaction = Transaction(Card=card, name=name, amount=amount)
         transaction.save()
         
         # Return reference to transaction (transaction succeed sign, can be done differently)

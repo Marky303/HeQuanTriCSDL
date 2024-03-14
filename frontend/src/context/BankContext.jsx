@@ -4,12 +4,17 @@ import { Outlet } from "react-router-dom";
 // Import userauth context
 import AuthContext from "./UserauthContext";
 
+// Import notify context
+import NotifyContext from "./NotifyContext";
+
 // Create bank context
 const BankContext = createContext();
 
 export default BankContext;
 
 export const BankProvider = () => {
+  let { notify } = useContext(NotifyContext);
+
   // Import token
   let { authTokens } = useContext(AuthContext);
 
@@ -25,6 +30,51 @@ export const BankProvider = () => {
   );
 
   // bank related functions
+  let createCard = async (name) => {
+    // Request to get all cards from user
+    let response = await fetch("http://localhost:8000/bank/createcard/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+      body: JSON.stringify({
+        name: name,
+      }),
+    });
+    let data = await response.json();
+
+    if (response.status == 202) {
+      notify("success", data.detail);
+    } else {
+      notify("error", data.detail);
+    }
+  };
+
+  // bank related functions
+  let makeTransaction = async (name, id, amount) => {
+    // Request to get all cards from user
+    let response = await fetch("http://localhost:8000/bank/maketransaction/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+      body: JSON.stringify({
+        name: name,
+        amount: amount,
+        id: id,
+      }),
+    });
+    let data = await response.json();
+
+    if (response.status == 202) {
+      notify("success", data.detail);
+    } else {
+      notify("error", data.detail);
+    }
+  };
+
   let getCards = async () => {
     // Request to get all cards from user
     let response = await fetch("http://localhost:8000/bank/getcardsinfo/", {
@@ -59,6 +109,8 @@ export const BankProvider = () => {
 
     // bank related functions
     changeCurrentCard: changeCurrentCard,
+    createCard: createCard,
+    makeTransaction: makeTransaction,
   };
 
   return (
