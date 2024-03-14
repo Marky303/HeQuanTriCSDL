@@ -7,6 +7,12 @@ import { AuthProvider } from "./context/UserauthContext";
 // AuthContext calls function from NotifyContext -> NotifyProvider wraps AuthProvider
 import { NotifyProvider } from "./context/NotifyContext";
 
+// Import BankContext for bank related pages
+import { BankProvider } from "./context/BankContext";
+
+// Layout for website
+import Layout from "./hocs/Layout.jsx";
+
 // Importing introduction related pages
 import Opening from "./pages/home/Opening";
 import Contacts from "./pages/home/Contacts";
@@ -27,11 +33,11 @@ import Activate from "./pages/userauth/Activate";
 import ResetPassword from "./pages/userauth/ResetPassword";
 import ResetPasswordConfirm from "./pages/userauth/ResetPasswordConfirm";
 
+// Importing bank related pages
+import CardManagement from "./pages/bank/CardManagement";
+
 // Importing 404 page
 import PageNotFound from "./pages/error/PageNotFound";
-
-// Layout for website
-import Layout from "./hocs/Layout.jsx";
 
 // Include/setup all pages in application wrapper/router
 const App = () => (
@@ -53,6 +59,10 @@ const App = () => (
               path="/password/reset/confirm/:uid/:token"
               element={<ResetPasswordConfirm />}
             />
+
+            <Route exact path="/bank" element={<BankProvider />}>
+              <Route exact path="/bank/cards" element={<CardManagement />} />
+            </Route>
 
             <Route exact path="/viewprofile/:name" element={<UserProfile />} />
             <Route exact path="/home" element={<Opening />} />
