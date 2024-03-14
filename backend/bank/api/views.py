@@ -75,7 +75,6 @@ def getCardsinfo(request):
 @permission_classes([IsAuthenticated])
 def createTransaction(request):
     user = request.user
-    print(type(user))
 
     # Converting request.body to dictionary type
     dict = request.body.decode("UTF-8")
@@ -92,13 +91,18 @@ def createTransaction(request):
     id = data['id']
     
     # Getting user card that was used to make the transaction
-    card = Card.objects.get(id=id)
+    try: 
+        card = Card.objects.get(id=id)
+    except: 
+        content = {'detail': 'Cannot find card'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
     # Creating a new transaction
     transactionStatus = ""
     try:
         transactionStatus = Transaction.createNewTransaction(name, amount, user, card)
     except:
+        # Some other error that havent been detected
         content = {'detail': 'Cannot create new card'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
     

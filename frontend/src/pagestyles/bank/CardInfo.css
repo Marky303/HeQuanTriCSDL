@@ -6,3 +6,119 @@
     margin: auto;
     border-radius: 2.8dvh
 }
+
+.choose-card-prompt {
+    text-align: center;
+    font-size: 5dvh;
+    margin-top: 30dvh;
+    font-weight: 900;
+    color: rgb(151, 151, 151);
+}
+
+.currentcard-topsection-cont {
+    
+
+    height: 25dvh;
+    display: grid;
+    grid-template-columns: 4fr 2.5fr;
+}
+
+.currentcard-balance-cont {
+    border: solid;
+
+    border-radius: 2.8dvh;
+    margin: 0.7dvh;
+}
+
+.currentcard-balance-prompt {
+    font-size: 4dvh;
+    padding: 0;
+    margin: 0;
+    margin-top: 1.5dvh;
+    margin-left: 2dvw;
+}
+
+.currentcard-balance-value {
+    font-size: 6.3dvh;
+    padding: 0;
+    margin: 0;
+    margin-top: 0.5dvh;
+    margin-left: 3.9dvw;
+}
+
+.currentcard-name-prompt {
+    font-size: 2.5dvh;
+    padding: 0;
+    margin: 0;
+    margin-top: 1.4dvh;
+    margin-left: 2dvw;
+}
+
+.currentcard-name-value {
+    font-size: 3.5dvh;
+    padding: 0;
+    margin: 0;
+    margin-top: 0.5dvh;
+    margin-left: 3.9dvw;
+}
+
+.currentcard-thismonth {
+    border: solid;
+
+    border-radius: 2.8dvh;
+    margin: 0.7dvh;
+    margin-left: 0;
+}
+
+.currentcard-thismonth-prompt {
+    margin: 0;
+    font-size: 3dvh;
+    margin-top: 0.5dvh;
+    margin-left: 0.8dvw;
+}
+
+.currentcard-thismonth-receive {
+    border: solid;
+
+    background-color: rgb(99, 196, 99);
+    border-radius: 2dvh;
+    height: 8dvh;
+    margin: 1dvh;
+    width: 15dvw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.currentcard-thismonth-spend {
+    border: solid;
+
+    background-color: rgb(196, 99, 99);
+    border-radius: 2dvh;
+    height: 8dvh;
+    margin: 1dvh;
+    width: 15dvw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.currentcard-rs-prompt {
+    margin: 0px;
+    margin-left: 1.5dvh;
+    margin-top: 0.5dvh;
+    font-size: 2.2dvh;
+}
+
+.currentcard-rs-value {
+    margin: 0px;
+    margin-left: 3.1dvh;
+    margin-top: 0.5dvh;
+    font-size: 3.2dvh;
+}
+
+.currentcard-botsection-cont {
+    border: solid;
+
+    margin: 0.7dvh;
+    border-radius: 2.8dvh;
+    height: 43dvh;
+}
