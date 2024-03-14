@@ -18,7 +18,10 @@ export const BankProvider = () => {
   // Import token
   let { authTokens } = useContext(AuthContext);
 
+  // Context variables
   let [currentCard, setCurrentCard] = useState(null);
+
+  let [currentTrans, setCurrentTrans] = useState(null);
 
   let [loading, setLoading] = useState(true);
 
@@ -94,6 +97,31 @@ export const BankProvider = () => {
     if (loading) setLoading(false);
   };
 
+  let getTransactions = async (id, dayStart, dayEnd) => {
+    // Request to get all transaction based on conditions
+    let response = await fetch("http://localhost:8000/bank/gettransactionsinfo/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+      body: JSON.stringify({
+        id: id,
+        dayStart: dayStart,
+        dayEnd: dayEnd,
+      }),
+    });
+    let data = await response.json();
+
+    if (response.status == 200) {
+      setCurrentTrans(data);
+    }
+    else 
+    {
+        notify("error", "Cannot get transaction")
+    }
+  };
+
   let changeCurrentCard = (card) => {
     setCurrentCard(card);
   };
@@ -106,11 +134,13 @@ export const BankProvider = () => {
     // bank related variables
     cards: JSON.stringify(cards),
     currentCard: currentCard,
+    currentTrans: currentTrans,
 
     // bank related functions
     changeCurrentCard: changeCurrentCard,
     createCard: createCard,
     makeTransaction: makeTransaction,
+    getTransactions: getTransactions,
   };
 
   return (

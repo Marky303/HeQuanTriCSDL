@@ -3,14 +3,22 @@ import React, { useState, useEffect, useContext } from "react";
 // Import style
 import "../../pagestyles/bank/CardInfo.css";
 
+// Importing components
+import TransactionList from "../../components/bank/TransactionList";
+
 // Importing bank context
 import BankContext from "../../context/BankContext";
 
 const CardInfo = () => {
   let { currentCard } = useContext(BankContext);
   let currentCardObj = JSON.parse(currentCard);
+  let { getTransactions } = useContext(BankContext);
 
-  useEffect(() => {}, [currentCard]);
+  useEffect(() => {
+    if (currentCard) {
+      getTransactions(currentCardObj.id, "null", "null");
+    }
+  }, [currentCard]);
 
   return (
     <div className="card-info-cont">
@@ -21,7 +29,10 @@ const CardInfo = () => {
               <p className="currentcard-balance-prompt">Balance</p>
               <p className="currentcard-balance-value">{currentCardObj.bal}$</p>
               <p className="currentcard-name-prompt">Name</p>
-              <p className="currentcard-name-value">{String(currentCardObj.name).toUpperCase()} // {currentCardObj.id}</p>
+              <p className="currentcard-name-value">
+                {String(currentCardObj.cardName).toUpperCase()} //{" "}
+                {currentCardObj.id}
+              </p>
             </div>
             <div className="currentcard-thismonth">
               <p className="currentcard-thismonth-prompt">This month</p>
@@ -36,7 +47,12 @@ const CardInfo = () => {
             </div>
           </div>
           <div className="currentcard-botsection-cont">
-
+            <div className="currentcard-transaction-cont">
+              <div className="currentcard-transaction-prompt">History</div>
+              <div className="currentcard-transaction-list-cont">
+                <TransactionList />
+              </div>
+            </div>
           </div>
         </div>
       ) : (

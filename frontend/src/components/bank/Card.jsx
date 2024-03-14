@@ -8,7 +8,7 @@ import "../../pagestyles/bank/Card.css";
 
 const Card = ({ card }) => {
   // Convert py datetime to date
-  let date = new Date(card.expiration);
+  let date = new Date(card.Cexpiration);
   let year = String(date.getFullYear()).slice(2);
   let month = String(date.getMonth());
   let exprDate = month + " / " + year;
@@ -51,7 +51,7 @@ const Card = ({ card }) => {
               <p>VALID TILL</p>
             </div>
             <div className="row name">
-              <p>{card.name.toUpperCase()}</p>
+              <p>{card.cardName .toUpperCase()}</p>
               <p>{exprDate}</p>
             </div>
           </div>
@@ -65,7 +65,7 @@ const Card = ({ card }) => {
               <p>{card.cvv}</p>
             </div>
             <div className="row card-text">
-              <p>This card is a demo.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
             <div className="row signature">
               <p className="customer-sig">CUSTOMER SIGNATURE</p>
