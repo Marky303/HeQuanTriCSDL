@@ -13,9 +13,16 @@ const Card = ({ card }) => {
   let month = String(date.getMonth());
   let exprDate = month + " / " + year;
 
+
+  let { changeCurrentCard } = useContext(BankContext);
+
+  let cardClickHandler = () => {
+    changeCurrentCard(JSON.stringify(card));
+  }
+
   return (
     <div className="container">
-      <div className="card">
+      <button className="card" onClick={()=>cardClickHandler()}>
         <div className="card-inner">
           <div className="front">
             <img
@@ -34,9 +41,9 @@ const Card = ({ card }) => {
               />
             </div>
             <div className="row card-no">
-              <p>{card.number.slice(0,4)}</p>
-              <p>{card.number.slice(4,8)}</p>
-              <p>{card.number.slice(8,12)}</p>
+              <p>{card.number.slice(0, 4)}</p>
+              <p>{card.number.slice(4, 8)}</p>
+              <p>{card.number.slice(8, 12)}</p>
               <p>{card.number.slice(12)}</p>
             </div>
             <div className="row card-holder">
@@ -58,9 +65,7 @@ const Card = ({ card }) => {
               <p>{card.cvv}</p>
             </div>
             <div className="row card-text">
-              <p>
-                This card is a demo.
-              </p>
+              <p>This card is a demo.</p>
             </div>
             <div className="row signature">
               <p className="customer-sig">CUSTOMER SIGNATURE</p>
@@ -71,7 +76,7 @@ const Card = ({ card }) => {
             </div>
           </div>
         </div>
-      </div>
+      </button>
     </div>
   );
 };

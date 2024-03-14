@@ -1,0 +1,8 @@
+.card-info-cont {
+    border: solid;
+    background-color: rgb(203, 203, 203);
+    width: 50dvw;
+    height: 70dvh;
+    margin: auto;
+    border-radius: 2.8dvh
+}

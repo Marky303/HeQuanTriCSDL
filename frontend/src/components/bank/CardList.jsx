@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
+import List from "rc-virtual-list";
+
+// Importing styles
+import "../../pagestyles/bank/CardList.css";
 
 // Importing bank context
 import BankContext from "../../context/BankContext";
@@ -11,9 +15,9 @@ const CardList = () => {
   let cardObjs = JSON.parse(cards);
 
   return (
-    <div>
+    <div className="card-list-cont">
       {cardObjs.map((card) => {
-        return <Card key={card.id} card={card}/>;
+        return <Card key={card.id} card={card} />;
       })}
     </div>
   );

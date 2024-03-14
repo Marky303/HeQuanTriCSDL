@@ -1,0 +1,7 @@
+.card-list-cont {
+    width: 49dvh;
+    height: 92dvh;
+    
+    overflow-x: hidden;
+    overflow-y: auto;
+}

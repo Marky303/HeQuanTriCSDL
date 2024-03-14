@@ -13,6 +13,8 @@ export const BankProvider = () => {
   // Import token
   let { authTokens } = useContext(AuthContext);
 
+  let [currentCard, setCurrentCard] = useState(null);
+
   let [loading, setLoading] = useState(true);
 
   // bank related variables
@@ -42,14 +44,21 @@ export const BankProvider = () => {
     if (loading) setLoading(false);
   };
 
+  let changeCurrentCard = (card) => {
+    setCurrentCard(card);
+  };
+
   useEffect(() => {
     if (loading) getCards();
-  }, [loading]);
+  }, [currentCard]);
 
   let contextData = {
     // bank related variables
     cards: JSON.stringify(cards),
+    currentCard: currentCard,
+
     // bank related functions
+    changeCurrentCard: changeCurrentCard,
   };
 
   return (
