@@ -1,0 +1,8 @@
+.testpage-opencard-btn {
+    color: blue;
+    width: 15dvw;
+    height: 8dvh;
+    margin: 2dvh;
+    border-radius: 2.8dvh;
+    cursor: pointer;
+}

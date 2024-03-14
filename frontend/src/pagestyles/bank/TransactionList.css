@@ -1,0 +1,22 @@
+.transactionlist-cont {
+    border: solid;
+}
+
+.transaction-content{
+    border: solid;
+
+    margin: 1dvh;
+    display: grid;
+    grid-template-columns: 2fr 4.5fr 1.5fr;
+    border-radius: 2.8dvh;
+    height: 5dvh;
+    background-color: rgb(236, 236, 236);
+}
+
+.transaction-content-prompt {
+    font-size: 2dvh;
+    margin: 0;
+    margin: 1.2dvh;
+    margin-left: 1.25dvw;
+    
+}

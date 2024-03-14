@@ -115,14 +115,36 @@ def createTransaction(request):
     content = {'detail': 'Transaction made successfully'}
     return Response(content, status=status.HTTP_202_ACCEPTED)
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def getTransactionsinfo(request):
     user = request.user
 
-    # Getting all user cards
-    transactions = user.transactions.all()
+    # Converting request.body to dictionary type
+    dict = request.body.decode("UTF-8")
+    data = ast.literal_eval(dict)
     
-    # Serialize card and return response
+    # Extracting transaction data from request
+    id = data['id']
+    dayStart = data['dayStart']
+    dayEnd = data['dayEnd']
+
+    # Query
+    # Query with join on transaction and card
+    if id == "null":
+        # Get all user's transaction
+        transactions = Transaction.objects.all().select_related('Card')
+    else:
+        # Get all user's cards' transaction
+        transactions = Transaction.objects.all().select_related('Card').filter(Card_id=id)
+    
+    # Query with composite condition + subquery with time
+    
+    
+    
+    # Prefetch object to speed up query
+    transactions.prefetch_related('Card')
+    
+    # Serialize transactions and return response
     serializer = TransactionSerializer(transactions, many=True)
     return Response(serializer.data)
