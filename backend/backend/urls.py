@@ -10,4 +10,7 @@ urlpatterns = [
     
     # Account path
     path('account/', include('account.api.urls')),
+    
+    # Cash money $$$ path
+    path('bank/', include('bank.api.urls')),
 ]

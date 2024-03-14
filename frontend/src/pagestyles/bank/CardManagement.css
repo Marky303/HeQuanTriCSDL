@@ -1,0 +1,5 @@
+.card-management-cont {
+    display: grid;
+    grid-template-columns: 1fr 0.1fr;
+}
+

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     
     # Apps
     'account',
+    'bank',
 ]
 
 MIDDLEWARE = [
