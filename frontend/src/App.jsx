@@ -35,6 +35,7 @@ import ResetPasswordConfirm from "./pages/userauth/ResetPasswordConfirm";
 
 // Importing bank related pages
 import CardManagement from "./pages/bank/CardManagement";
+import TestPage from "./pages/bank/TestPage"
 
 // Importing 404 page
 import PageNotFound from "./pages/error/PageNotFound";
@@ -62,6 +63,7 @@ const App = () => (
 
             <Route exact path="/bank" element={<BankProvider />}>
               <Route exact path="/bank/cards" element={<CardManagement />} />
+              <Route exact path="/bank/test" element={<TestPage />} />
             </Route>
 
             <Route exact path="/viewprofile/:name" element={<UserProfile />} />

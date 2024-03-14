@@ -16,7 +16,7 @@ class Card(models.Model):
     
     # Card information below
     # Card name
-    name = models.TextField(max_length=50, default="Some new card")
+    cardName = models.TextField(max_length=50, default="Some new card")
     
     # Card number just to make it looks cool
     number = models.TextField(validators=[RegexValidator(regex='^.{16}$', message='Length has to be 16', code='nomatch')], unique=True)
@@ -28,11 +28,11 @@ class Card(models.Model):
     bal = models.DecimalField(max_digits=19, decimal_places=4, default=50)
     
     # Creation/Expiration date
-    creation = models.DateTimeField(default=dt.datetime.today(), blank=True)
-    expiration = models.DateTimeField(default=dt.datetime.today()+dt.timedelta(days=90), blank=True)
+    Ccreation = models.DateTimeField(default=dt.datetime.today(), blank=True)
+    Cexpiration = models.DateTimeField(default=dt.datetime.today()+dt.timedelta(days=90), blank=True)
     
     # Card functions
-    def createNewCard(name, user):
+    def createNewCard(cardName, user):
         # Generate a unique cardNumber
         number = ccard.visa()
         isUnique = False
@@ -51,7 +51,7 @@ class Card(models.Model):
         # Generate a CVV
         cvv = random.randint(100, 999)
         
-        card = Card(UserAccount=user, name=name, number=str(number), cvv=str(cvv))
+        card = Card(UserAccount=user, cardName=cardName, number=str(number), cvv=str(cvv))
         card.save()
         
         # Return card object to link user (needed?)
@@ -59,18 +59,15 @@ class Card(models.Model):
     
     # Django admin test
     def __str__(self):
-        return str(self.number)
+        return str(self.cardName)
     
 class Transaction(models.Model):
-    # Foreign key to user who made the transaction
-    UserAccount = models.ForeignKey(UserAccount, related_name='transactions', on_delete=models.CASCADE, null=True)
-    
     # Foreign key to the card that facilitated the transaction
     Card = models.ForeignKey(Card, related_name='transactions', on_delete=models.CASCADE, null=True)
     
     # Transaction information
-    name = models.TextField(max_length=50, default="Some new transaction")
-    creation = models.DateTimeField(default=dt.datetime.today(), blank=True)
+    transactionName = models.TextField(max_length=50, default="Some new transaction")
+    Tcreation = models.DateTimeField(default=dt.datetime.today(), blank=True)
     amount = models.DecimalField(max_digits=19, decimal_places=4, default=0)
     
     
@@ -89,7 +86,7 @@ class Transaction(models.Model):
         card.save()
         
         # Actually create transaction instance of the model
-        transaction = Transaction(UserAccount=user, Card=card, name=name, amount=amount)
+        transaction = Transaction(Card=card, transactionName=name, amount=amount)
         transaction.save()
         
         # Return reference to transaction (transaction succeed sign, can be done differently)
@@ -97,5 +94,5 @@ class Transaction(models.Model):
     
     # Django admin test
     def __str__(self):
-        return str(self.name)
+        return str(self.transactionName)
     

@@ -122,3 +122,10 @@
     border-radius: 2.8dvh;
     height: 43dvh;
 }
+
+.currentcard-transaction-prompt {
+    margin-top: 0.75dvh;
+    margin-left: 1.5dvw;
+
+    font-size: 3dvh;
+}
