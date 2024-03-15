@@ -24,9 +24,9 @@ const Card = ({ card }) => {
     <div className="container">
       <button className="card" onClick={()=>cardClickHandler()}>
         <div className="card-inner">
-          <div className="front">
+          <div style={{backgroundImage: `linear-gradient(${card.gradDeg}deg, ${card.grad1}, ${card.grad2})`}} className="front">
             <img
-              src="https://source.unsplash.com/random/200x200?sig=1"
+              src="https://source.unsplash.com/random/500x300?sig=10"
               className="map-img"
             />
             <div className="row">
@@ -55,7 +55,7 @@ const Card = ({ card }) => {
               <p>{exprDate}</p>
             </div>
           </div>
-          <div className="back">
+          <div style={{backgroundImage: `linear-gradient(${360-card.gradDeg}deg, ${card.grad2}, ${card.grad1})`}} className="back">
             <img src="https://i.ibb.co/PYss3yv/map.png" className="map-img" />
             <div className="bar"></div>
             <div className="row card-cvv">

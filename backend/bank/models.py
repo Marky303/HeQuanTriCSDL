@@ -1,8 +1,9 @@
 from django.db import models
 from account.models import UserAccount
 
-# Verify length
+# Verify
 from django.core.validators import RegexValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 import ccard
@@ -31,6 +32,11 @@ class Card(models.Model):
     Ccreation = models.DateTimeField(default=dt.datetime.today(), blank=True)
     Cexpiration = models.DateTimeField(default=dt.datetime.today()+dt.timedelta(days=90), blank=True)
     
+    # Decorations
+    grad1 = models.TextField(validators=[RegexValidator(regex='^.{7}$', message='Length has to be 7', code='nomatch')], default="#FFFFFF")
+    grad2 = models.TextField(validators=[RegexValidator(regex='^.{7}$', message='Length has to be 7', code='nomatch')], default="#FFFFFF")
+    gradDeg = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(360)], default=45)
+    
     # Card functions
     def createNewCard(cardName, user):
         # Generate a unique cardNumber
@@ -51,7 +57,13 @@ class Card(models.Model):
         # Generate a CVV
         cvv = random.randint(100, 999)
         
-        card = Card(UserAccount=user, cardName=cardName, number=str(number), cvv=str(cvv))
+        # Randomize gradient
+        gradRandom= lambda: random.randint(0,255)
+        grad1 = '#%02X%02X%02X' % (gradRandom(),gradRandom(),gradRandom())
+        grad2 = '#%02X%02X%02X' % (gradRandom(),gradRandom(),gradRandom())
+        gradDeg = random.randint(1, 360)
+        
+        card = Card(UserAccount=user, cardName=cardName, number=str(number), cvv=str(cvv), grad1=grad1, grad2=grad2, gradDeg=gradDeg)
         card.save()
         
         # Return card object to link user (needed?)
