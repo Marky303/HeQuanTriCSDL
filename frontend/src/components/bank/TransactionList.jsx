@@ -28,7 +28,7 @@ const TransactionList = () => {
         let Tcreation =
           hh + ":" + mm + ":" + ss + " - " + DD + "/" + MM + "/" + YYYY;
         return (
-          <div className="transaction-content">
+          <div className="transaction-content" key={Tran.id}>
             <div className="transaction-name">
               <p className="transaction-content-prompt">
                 {Tran.transactionName.toUpperCase()}
