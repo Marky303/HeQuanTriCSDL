@@ -13,10 +13,13 @@ const CardInfo = () => {
   let { currentCard } = useContext(BankContext);
   let currentCardObj = JSON.parse(currentCard);
   let { getTransactions } = useContext(BankContext);
+  let { getMonthlyValue } = useContext(BankContext);
+  let { plus, minus } = useContext(BankContext);
 
   useEffect(() => {
     if (currentCard) {
       getTransactions(currentCardObj.id, "null", "null");
+      getMonthlyValue(currentCardObj.id);
     }
   }, [currentCard]);
 
@@ -38,11 +41,11 @@ const CardInfo = () => {
               <p className="currentcard-thismonth-prompt">This month</p>
               <div className="currentcard-thismonth-receive">
                 <p className="currentcard-rs-prompt">Receive</p>
-                <p className="currentcard-rs-value">999</p>
+                <p className="currentcard-rs-value">{plus?plus:0}</p>
               </div>
               <div className="currentcard-thismonth-spend">
                 <p className="currentcard-rs-prompt">Spend</p>
-                <p className="currentcard-rs-value">999</p>
+                <p className="currentcard-rs-value">{minus?minus:0}</p>
               </div>
             </div>
           </div>

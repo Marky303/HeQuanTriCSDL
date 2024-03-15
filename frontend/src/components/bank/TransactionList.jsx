@@ -26,7 +26,7 @@ const TransactionList = () => {
         let mm = date.getMinutes();
         let ss = date.getSeconds();
         let Tcreation =
-          hh + "/" + mm + "/" + ss + " - " + DD + "/" + MM + "/" + YYYY;
+          hh + ":" + mm + ":" + ss + " - " + DD + "/" + MM + "/" + YYYY;
         return (
           <div className="transaction-content">
             <div className="transaction-name">

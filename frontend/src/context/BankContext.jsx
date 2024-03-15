@@ -25,6 +25,9 @@ export const BankProvider = () => {
 
   let [loading, setLoading] = useState(true);
 
+  let [plus, setPlus] = useState(null);
+  let [minus, setMinus] = useState(null);
+
   // bank related variables
   let [cards, setCards] = useState(() =>
     localStorage.getItem("cards")
@@ -122,6 +125,31 @@ export const BankProvider = () => {
     }
   };
 
+  let getMonthlyValue = async (id) => {
+    // Request to get all transaction based on conditions
+    let response = await fetch("http://localhost:8000/bank/getmonthlytransactionvalue/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+      body: JSON.stringify({
+        id: id,
+        status: status,
+      }),
+    });
+    let data = await response.json();
+
+    if (response.status == 202) {
+      setPlus(data.plus.amount__sum)
+      setMinus(data.minus.amount__sum)
+    }
+    else 
+    {
+        notify("error", "Cannot get transaction")
+    }
+  };
+
   let changeCurrentCard = (card) => {
     setCurrentCard(card);
   };
@@ -135,12 +163,15 @@ export const BankProvider = () => {
     cards: JSON.stringify(cards),
     currentCard: currentCard,
     currentTrans: currentTrans,
+    plus: plus,
+    minus: minus,
 
     // bank related functions
     changeCurrentCard: changeCurrentCard,
     createCard: createCard,
     makeTransaction: makeTransaction,
     getTransactions: getTransactions,
+    getMonthlyValue: getMonthlyValue,
   };
 
   return (

@@ -12,6 +12,8 @@ from ..models import Card, Transaction, UserAccount
 # Other libraries
 import ast
 from decimal import Decimal
+import datetime as dt
+from django.db.models import Sum
 
 # Get card info view/ Scrapped since GET method body is frowned upon
 # @api_view(['GET'])
@@ -148,3 +150,33 @@ def getTransactionsinfo(request):
     # Serialize transactions and return response
     serializer = TransactionSerializer(transactions, many=True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def getmonthlytransactionvalue(request):
+    user = request.user
+
+    # Converting request.body to dictionary type
+    dict = request.body.decode("UTF-8")
+    data = ast.literal_eval(dict)
+    
+    # Extracting transaction data from request
+    id = data['id']
+    
+    # Get first and last date of this month
+    last_date = dt.date.today()
+    nxt_mnth = last_date.replace(day=28) + dt.timedelta(days=4)
+    last_date = nxt_mnth - dt.timedelta(days=nxt_mnth.day)
+    
+    first_date = dt.date.today()
+    if first_date.day > 25:
+        first_date += dt.timedelta(7)
+    first_date = first_date.replace(day=1)
+    
+    # Query
+    plus = Transaction.objects.all().select_related('Card').filter(Card_id=id).filter(Tcreation__range=[first_date, last_date]).filter(amount__gt=0).aggregate(Sum('amount'))
+    minus = Transaction.objects.all().select_related('Card').filter(Card_id=id).filter(Tcreation__range=[first_date, last_date]).filter(amount__lt=0).aggregate(Sum('amount'))
+
+    # Test
+    content = {'plus': plus, 'minus': minus}
+    return Response(content, status=status.HTTP_202_ACCEPTED)
