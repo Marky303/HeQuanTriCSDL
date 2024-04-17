@@ -3,6 +3,7 @@
     height: 7dvh;
     display: grid;
     grid-template-columns: 3.2fr 16fr 4fr;
+
 }
 
 .home-link-cont {
@@ -21,7 +22,7 @@
 .app-name {
     margin-top: auto;
     margin-bottom: auto;
-    font-size: 4dvh;
+    font-size: 3dvh;
     text-align: left;
 }
 
@@ -70,7 +71,7 @@
 }
 
 .welcome-text {
-    font-size: 2.3dvh;
+    font-size: 2.1dvh;
     text-align: center;
 }
 

@@ -11,8 +11,8 @@ import CardList from "../../components/bank/CardList";
 import CardInfo from "../../components/bank/CardInfo";
 
 const CardManagement = () => {
-  //   let { cards } = useContext(BankContext);
-  //   let cardObjs = JSON.parse(cards);
+    let { cards } = useContext(BankContext);
+    // let cardObjs = JSON.parse(cards);
 
   return (
     <div className="card-management-cont">
