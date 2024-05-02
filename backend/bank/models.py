@@ -33,9 +33,9 @@ class Card(models.Model):
     Cexpiration = models.DateTimeField(default=dt.datetime.today()+dt.timedelta(days=90), blank=True)
     
     # Decorations
-    # grad1 = models.TextField(validators=[RegexValidator(regex='^.{7}$', message='Length has to be 7', code='nomatch')], default="#FFFFFF")
-    # grad2 = models.TextField(validators=[RegexValidator(regex='^.{7}$', message='Length has to be 7', code='nomatch')], default="#FFFFFF")
-    # gradDeg = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(360)], default=45)
+    grad1 = models.TextField(validators=[RegexValidator(regex='^.{7}$', message='Length has to be 7', code='nomatch')], default="#FFFFFF")
+    grad2 = models.TextField(validators=[RegexValidator(regex='^.{7}$', message='Length has to be 7', code='nomatch')], default="#FFFFFF")
+    gradDeg = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(360)], default=45)
     
     # Card functions
     def createNewCard(cardName, user):
@@ -63,8 +63,7 @@ class Card(models.Model):
         grad2 = '#%02X%02X%02X' % (gradRandom(),gradRandom(),gradRandom())
         gradDeg = random.randint(1, 360)
         
-        # card = Card(UserAccount=user, cardName=cardName, number=str(number), cvv=str(cvv), grad1=grad1, grad2=grad2, gradDeg=gradDeg)
-        card = Card(UserAccount=user, cardName=cardName, number=str(number), cvv=str(cvv))
+        card = Card(UserAccount=user, cardName=cardName, number=str(number), cvv=str(cvv), grad1=grad1, grad2=grad2, gradDeg=gradDeg)
         card.save()
         
         # Return card object to link user (needed?)

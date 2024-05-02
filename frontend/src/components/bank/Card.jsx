@@ -26,7 +26,7 @@ const Card = ({ card }) => {
         <div className="card-inner">
           <div style={{backgroundImage: `linear-gradient(${card.gradDeg}deg, ${card.grad1}, ${card.grad2})`}} className="front">
             <img
-              src="https://source.unsplash.com/random/500x300?sig=10"
+              src={"https://source.unsplash.com/random/500x300?sig="+card.id}
               className="map-img"
             />
             <div className="row">
