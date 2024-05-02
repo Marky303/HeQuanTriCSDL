@@ -10,5 +10,7 @@ urlpatterns = [
     path('createcard/', views.createCard),
     path('maketransaction/', views.createTransaction),
     path('gettransactionsinfo/', views.getTransactionsinfo),
+    path('gettransactionlist/', views.getTransactionsList),
+    
     path('getmonthlytransactionvalue/', views.getmonthlytransactionvalue),
 ]

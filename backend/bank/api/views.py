@@ -14,6 +14,7 @@ import ast
 from decimal import Decimal
 import datetime as dt
 from django.db.models import Sum
+from django.db.models import Q
 
 # Get card info view/ Scrapped since GET method body is frowned upon
 # @api_view(['GET'])
@@ -180,3 +181,28 @@ def getmonthlytransactionvalue(request):
     # Test
     content = {'plus': plus, 'minus': minus}
     return Response(content, status=status.HTTP_202_ACCEPTED)
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getTransactionsList(request):
+
+    first_date = request.GET.get('fromDate')
+    last_date = request.GET.get('toDate')
+    if first_date == "null":
+        first_date = str(dt.datetime.strptime('2020/01/01 00:00:00', "%Y/%m/%d %H:%M:%S"))
+    if last_date == "null":
+        last_date = str(dt.datetime.now())
+        
+    print(first_date)
+    transactions = Transaction.objects.all().select_related('Card').filter(Tcreation__range=[first_date, last_date])
+    
+    # Prefetch object to speed up query
+    transactions.prefetch_related('Card')
+    
+    # Serialize transactions and return response
+    serializer = TransactionSerializer(transactions, many=True)
+
+    return Response(serializer.data)
+

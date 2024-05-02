@@ -15,7 +15,6 @@ const CardInfo = () => {
   let { getTransactions } = useContext(BankContext);
   let { getMonthlyValue } = useContext(BankContext);
   let { plus, minus } = useContext(BankContext);
-
   useEffect(() => {
     if (currentCard) {
       getTransactions(currentCardObj.id, "null", "null");

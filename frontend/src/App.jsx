@@ -39,6 +39,8 @@ import TestPage from "./pages/bank/TestPage"
 
 // Importing 404 page
 import PageNotFound from "./pages/error/PageNotFound";
+import TransactionList from "./components/bank/TransactionList.jsx";
+import AllTransactionList from "./components/bank/AllTransactionList"
 
 // Include/setup all pages in application wrapper/router
 const App = () => (
@@ -64,6 +66,7 @@ const App = () => (
             <Route exact path="/bank" element={<BankProvider />}>
               <Route exact path="/bank/cards" element={<CardManagement />} />
               <Route exact path="/bank/test" element={<TestPage />} />
+              <Route exact path="/bank/transaction" element={<AllTransactionList />} />
             </Route>
 
             <Route exact path="/viewprofile/:name" element={<UserProfile />} />

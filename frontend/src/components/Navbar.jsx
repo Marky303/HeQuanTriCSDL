@@ -53,8 +53,8 @@ const Navbar = () => {
             <a className="navbar-anchor" href="/bank/cards">
               <button className="navbar-anchor-btn">Cards</button>
             </a>
-            <a className="navbar-anchor" href="/bank/transacrion">
-              <button className="navbar-anchor-btn">Transacrion</button>
+            <a className="navbar-anchor" href="/bank/transaction">
+              <button className="navbar-anchor-btn">Transaction</button>
             </a>
           </div>
         </div>
