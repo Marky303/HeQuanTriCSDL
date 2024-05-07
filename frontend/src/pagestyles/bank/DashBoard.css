@@ -1,0 +1,51 @@
+.dashboard {
+    background-color: #f0f0f0; /* Gray background color for the dashboard */
+    padding: 20px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto 100px auto;
+    gap: 20px;
+  }
+  
+  .grid-item {
+    background-color: #fff; /* White background color for each component */
+    padding: 20px;
+  }
+  
+  .chart {
+    grid-column: span 8; /* Transaction Activity spans 8 columns */
+    grid-row: 1;
+  }
+  
+  .card {
+    background-color: blue;
+    grid-column: span 3; /* Card spans 3 columns */
+    grid-row: 1;
+  }
+  .recent-transactions {
+    grid-column: span 8; /* Transaction List spans 8 columns */
+    grid-row: 3;
+  }
+  
+  .expense-overview {
+    grid-column: span 3; /* Expense Overview spans 1 column */
+    grid-row: 3;
+  }
+  
+  .total-expense {
+    grid-column: span 4; /* Total Expense spans 1 column */
+    grid-row: 2;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .total-income {
+    grid-column: span 4; /* Total Income spans 1 column */
+    grid-row: 2;
+    display: flex;
+    justify-content: center;
+  }
+  
