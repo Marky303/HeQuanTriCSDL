@@ -30,7 +30,7 @@ const Home = () => {
   return authTokens ? (
     <div className="home-page-cont">
       <p> This is the home page </p>
-      <p> {JSON.stringify(notes)} </p>
+      {/* <p> {JSON.stringify(notes)} </p> */}
     </div>
   ) : (
     <Navigate to="/login" />

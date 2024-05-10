@@ -118,7 +118,7 @@ def createTransaction(request):
     content = {'detail': 'Transaction made successfully'}
     return Response(content, status=status.HTTP_202_ACCEPTED)
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getTransactionsinfo(request):
     user = request.user

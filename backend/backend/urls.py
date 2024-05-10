@@ -13,4 +13,5 @@ urlpatterns = [
     
     # Cash money $$$ path
     path('bank/', include('bank.api.urls')),
+    path('bank/', include('bank.urls')),
 ]

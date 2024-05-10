@@ -39,7 +39,7 @@ const Navbar = () => {
     <div className="navbar-cont">
       <Link to={authTokens ? "/" : "/home"} className="home-link-cont">
         <img className="logo-pic" src={logo}></img>
-        <p className="app-name">App name</p>
+        <p className="app-name">Bank</p>
       </Link>
 
       <div className="search-cont">
@@ -55,7 +55,10 @@ const Navbar = () => {
             </a>
             <a className="navbar-anchor" href="/bank/transaction">
               <button className="navbar-anchor-btn">Transaction</button>
-            </a>
+            </a>  
+            <a className="navbar-anchor" href="/bank/dashboard">
+              <button className="navbar-anchor-btn">DashBoard</button>
+            </a>  
           </div>
         </div>
         ) : (

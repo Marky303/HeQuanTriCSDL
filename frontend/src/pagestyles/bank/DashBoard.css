@@ -1,0 +1,57 @@
+.dashboard {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #e8e8e8;
+    margin: 0;
+    overflow: hidden;
+}
+
+h2 {
+    margin: 0;
+    padding: 10px 0 10px 30px;
+}
+
+.container {
+    font-size: medium;
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 1fr 80px 1fr;
+    grid-gap: 1.5dvh;
+    margin: 0 30px;
+}
+
+.transaction-activity {
+    grid-column: 1 / span 2;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.cards {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 3;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.total-expense {
+    grid-column: 1 / 2; /* Adjusted to span 1 column */
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.total-income {
+    grid-column: 2 / 3; /* Adjusted to span 1 column */
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.recent-transactions {
+    grid-column: 1 / span 2; /* Adjusted to span 2 columns */
+    grid-row: 3 / 4;
+    background-color: white;
+    border-radius: 10px;
+    padding-left: 10px;
+}

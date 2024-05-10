@@ -13,7 +13,6 @@ import Card from "../../components/bank/Card";
 const CardList = () => {
   let { cards } = useContext(BankContext);
   let cardObjs = JSON.parse(cards);
-
   return (
     <div className="card-list-cont">
       {cardObjs.map((card) => {

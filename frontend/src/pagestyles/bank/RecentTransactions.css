@@ -1,0 +1,34 @@
+.recent-transactions {
+    margin-top: 20px;
+  }
+  
+  .recent-transactions h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .recent-transactions ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .recent-transactions li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  
+  .recent-transactions li p {
+    margin: 0;
+  }
+  
+  .recent-transactions li p:first-child {
+    font-weight: bold;
+  }
+  
+  .recent-transactions li p:last-child {
+    color: #888;
+    font-size: 14px;
+  }
+  
