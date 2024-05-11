@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+
+.total {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: repeat(2, auto);
+    padding-left: 2em;
+}
+
+.total p {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 1;
+    font-size: 2em;
+    margin-top: 10px;
+}
+  
+.total h3 {
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 1;
+    margin: 0;
+    font-weight: 400;
+    font-size: 1em;
+
+}
+
+span {
+    grid-row: 1 / span 1;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+
+.income {
+    background-color: greenyellow;
+}
+
+.expense {
+    background-color: rgba(244, 67, 32, 0.895);
+}

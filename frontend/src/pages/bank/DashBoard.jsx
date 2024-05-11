@@ -57,10 +57,10 @@ const DashBoard = () => {
                     <CardList onSelect={handleCardClick}/>
                 </div>
                 <div className='total-expense'>
-                    <Total amount={totalExpense} label="Total Expense" />
+                    <Total amount={totalExpense} label="Total Expense" className='expense'/>
                 </div>
                 <div className='total-income'>
-                    <Total amount={totalIncome} label="Total Income" />
+                    <Total amount={totalIncome} label="Total Income" className='income'/>
                 </div>
                 <div className="recent-transactions">
                     <RecentTransactions />

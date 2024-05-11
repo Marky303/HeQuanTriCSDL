@@ -1,3 +1,14 @@
-h3 {
-    font-family: 'Times New Roman', Times, serif;
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+
+.transaction-activity {
+    display: flex; 
+    align-items: left; 
+    font-family: 'Nunito';
+  }
+  
+.transaction-activity h3 {
+    margin-right: auto;
+    margin-left: 10px;
+    font-size: 1.2em;
 }
+  

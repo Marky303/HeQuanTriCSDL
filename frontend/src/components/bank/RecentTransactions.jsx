@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../api';
 import '../../pagestyles/bank/RecentTransactions.css';
+
 const RecentTransactions = () => {
     const [recentTransactions, setRecentTransactions] = useState([]);
 
@@ -20,18 +21,23 @@ const RecentTransactions = () => {
         }
     };
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    };
+
     return (
         <div className='recent-transactions'>
             <h3>Recent Transactions</h3>
-            <ul>
+            <div className='transactions'>
                 {recentTransactions.map(transaction => (
-                    <li key={transaction.id}>
-                        <p>{transaction.transactionName}</p>
-                        <p>{transaction.Tcreation}</p>
+                    <div  className='transaction' key={transaction.id}>
                         <p>{transaction.amount}</p>
-                    </li>
+                        <p>{formatDate(transaction.Tcreation)}</p>
+                        <p>{transaction.transactionName}</p>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };
